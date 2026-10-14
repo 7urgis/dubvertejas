@@ -1,5 +1,171 @@
 # Dubvertėjas (AI Voiceover & Dubbing Remaster Engine)
 
+## Vietinis japoniškų balsų įgarsinimas
+
+### Gemini vertimai daugeliui epizodų
+
+Kiekvieno epizodo Gemini vertimą laikyk `data/gemini/NNN/translation.srt`:
+
+```text
+media/Dragon.Ball.Z.149.480p.DBox.DVD.REGRADE.LT-ENG-JAP.FLAC2.0.x264-SoM-7urgis.mkv
+data/gemini/149/english.srt       # programa ištraukia iš video
+data/gemini/149/glossary.md       # vardų ir terminų žinynas Gemini
+data/gemini/149/prompt.txt        # instrukcija Gemini
+data/gemini/149/translation.srt   # čia įrašyk Gemini rezultatą
+```
+
+Paruošk Gemini paketą:
+
+```bash
+unshare -Urn tools/Applio/.venv/bin/python dub_gemini.py 149 --export
+```
+
+Į Gemini įkelk `english.srt`, `glossary.md` ir `episode_context.md`, jei jis yra.
+Naudok `prompt.txt` instrukciją. Rezultatą įrašyk kaip `translation.srt` (galima ir
+`translation.txt`, bet ne abu). Turinys turi būti SRT su pradiniais subtitrų ID;
+programa išlaiko video laikus ir tikrina, ar yra visos dialogo replikos.
+
+Generuok su japoniškomis balso nuorodomis ir GPU kalbos patikra:
+
+```bash
+unshare -Urn tools/Applio/.venv/bin/python dub_gemini.py 149
+```
+
+Keisk tik epizodo numerį. Keli epizodai apdorojami paeiliui:
+
+```bash
+unshare -Urn tools/Applio/.venv/bin/python dub_gemini.py 149 150 151
+```
+
+Video ieškomas `media/Dragon.Ball.Z.NNN.*LT-ENG-JAP*.mkv`; turi būti vienas
+atitinkamas originalus MKV. Trūkstant video, vertimo ar dialogo ID programa sustoja,
+nepradeda automatinio vertimo. Ištariamas tik importuotas Gemini tekstas. Rezultatai
+yra `output/gemini/NNN/<versija>/index.html` ir MP4. Ta pati video/vertimo versija
+tęsiama; pakeitus vertimą ar video sukuriama nauja versija ir ankstesnė išsaugoma.
+Tik teksto patikrai galima naudoti `--review-only`, nepradedant garso generavimo.
+
+Jei japoniškos replikos nepavyksta patikimai atpažinti, programa automatiškai
+palieka originalų japonišką garsą ir tęsia darbą. Praleistos replikos bei jų
+lietuviškas tekstas išsaugomi `skipped_references.json`. Gemini įgarsinimui naudojamas
+atskirtas balsas; tuščias, pasikartojantis arba žemo patikimumo atpažinimas atmetamas.
+Tai nėra tikslus muzikos ar minios detektorius: kai kurių užterštų balsų gali neatmesti.
+Pakartojus komandą tęsiamas nutrūkęs darbas, o užbaigti ankstesnės versijos renderiai
+išsaugomi atskirai nuo naujos balso patikros versijos.
+
+Gemini vertimas atliekamas tavo Gemini paskyroje; importas, balso generavimas ir
+renderis lieka vietiniai. Nauji paketai ir išvestys neperrašo ankstesnių priimtų
+įgarsinimų. 68 epizodo Gemini failo kopija jau yra `data/gemini/068/translation.srt`.
+
+### Originalaus lietuviško įgarsinimo tekstas
+
+Lietuvišką garso takelį galima transkribuoti vietiniu Whisper GPU, tada jo
+tekstą naudoti su japoniškų veikėjų balso nuorodomis. Vertimo modelis nenaudojamas.
+
+```bash
+unshare -Urn tools/Applio/.venv/bin/python transcribe_lt_dub.py \
+  --video media/Dragon.Ball.Z.068.480p.DBox.DVD.REGRADE.LT-ENG-JAP.FLAC2.0.x264-SoM-7urgis.mkv \
+  --out-dir output/068_original_lt_transcription
+```
+
+Klausymui ir teksto patikrai atidaryk `output/068_original_lt_transcription/index.html`.
+Pataisyk atpažinimo klaidas `transcript.json` prieš importuojant. ASR nėra
+patikrinta stenograma; vardai, galūnės ir foninė kalba gali būti atpažinti klaidingai.
+Angliški subtitrai naudojami dialogo langams bei kontekstui, ne teksto vertimui.
+Už šių langų esanti lietuviška kalba gali būti praleista.
+
+```bash
+unshare -Urn tools/Applio/.venv/bin/python dub_local.py \
+  --video media/Dragon.Ball.Z.068.480p.DBox.DVD.REGRADE.LT-ENG-JAP.FLAC2.0.x264-SoM-7urgis.mkv \
+  --out-dir output/omnivoice_068_japanese_original_lt \
+  --transcript-file output/068_original_lt_transcription/transcript.json \
+  --asr-device cuda
+```
+
+Šis variantas turi transkripcijos laikus, todėl replikų skaičius gali skirtis nuo
+subtitrų skaičiaus. Japoniškas kalbėtojas nustatomas tik pagal scenos laiką;
+kelių veikėjų replikos viename ASR segmente reikalauja peržiūros. Originalus
+lietuviškas įrašas naudojamas tik transkripcijai ir klausymui, ne galutiniam miksui.
+
+`--asr-device cuda` naudoja GPU japoniškų nuorodų atpažinimui ir sugeneruotos
+kalbos patikrai. Numatytoji reikšmė išlieka `cpu`. Demucs ir OmniVoice jau naudoja
+GPU. Japoniškos nuorodos originalaus teksto variante imamos iš pilnų japoniško
+dialogo subtitrų langų, ne iš galinčių nesutapti lietuviško dubo laikų.
+
+Lietuviškas replikas galima perkelti prie atitinkamo japoniško dialogo:
+
+```bash
+unshare -Urn tools/Applio/.venv/bin/python align_lt_dub.py \
+  --transcript output/068_original_lt_transcription/transcript.json \
+  --english-subtitles output/omnivoice_068_japanese_original_lt/english.srt \
+  --matching-subtitles media/gemini-code-1791969941448.txt \
+  --out-dir output/068_original_lt_japanese_timing
+```
+
+Suderinimas parenka subtitrų ID pagal panašius lietuviškus žodžius ir dialogo eilę,
+nekeičia originalių lietuviškų žodžių. Papildomi lietuviški subtitrai naudojami tik
+atitikmenims parinkti. Neaiškūs atitikmenys praleidžiami: ten lieka japoniškas
+garsas. `skipped_phrases.json` išsaugo praleistas replikas ir priežastis. Šis
+paprastas metodas prasčiau atpažįsta sinonimus ir labai skirtingas formuluotes;
+balai nėra tikimybės ar klausymu patvirtintas tikslumas. Naują `transcript.json` importuok
+su `--transcript-file` į atskirą išvesties katalogą. Pradinius laikus ir modelio
+atitikmenis galima patikrinti suderinimo kataloge.
+
+### Vietinis vertimas iš anglų subtitrų
+
+Numatytasis vertimas naudoja vietinį `qwen3:8b` per Ollama. Modelis gauna
+pokalbio bloką, aplinkines replikas, ankstesnį vertimą, lietuvišką žinyną ir
+konkretaus epizodo siužeto pastabas, tada atlieka papildomą lietuviško teksto
+redagavimo perėjimą. Whisper, Demucs ir OmniVoice taip pat
+veikia vietoje. `unshare -Urn` užblokuoja išorinį tinklą; programa įjungia tik
+vietinę loopback sąsają privačiam Ollama serveriui. Niekas nesiunčiama į debesiją.
+
+Pirmiausia paruošk tik naują vertimą, nekeisdamas jau baigto įgarsinimo:
+
+```bash
+unshare -Urn tools/Applio/.venv/bin/python dub_local.py \
+  --video media/Dragon.Ball.Z.068.480p.DBox.DVD.REGRADE.LT-ENG-JAP.FLAC2.0.x264-SoM-7urgis.mkv \
+  --out-dir output/omnivoice_068_japanese_qwen \
+  --translate-only
+```
+
+Atidaryk `output/omnivoice_068_japanese_qwen/translation_review.html`.
+Pataisymus galima įrašyti į `transcript.json` laukus `lt`. Pašalinus
+`--translate-only` iš tos pačios komandos, bus paruoštos japoniškos nuorodos,
+sugeneruoti balsai ir visas video su peržiūra `index.html`. `--prepare-only`
+paruošia ir vertimą, ir balso nuorodas, bet dar negeneruoja lietuviškos kalbos.
+
+Redaguojami konteksto šaltiniai:
+
+- `data/context/dragon_ball_lt.md`: vardai, linksniuotės, vietos, terminai,
+  veikėjų kalbėjimo stilius ir gerų replikų pavyzdžiai. Tai projekto žinynas;
+  dalis formų yra pradiniai pasiūlymai, ne oficiali terminija.
+- `data/context/ep068_lt.md`: 68 epizodo siužetas, santykiai ir svarbūs skirtumai
+  tarp veikėjų spėjimų ir patvirtintų faktų. Kitiems epizodams galima sukurti
+  `epNNN_lt.md` arba nurodyti `--episode-context kelias.md`.
+- `--glossary kelias.md` leidžia pasirinkti kitą lietuvišką žinyną.
+
+Modelis apdoroja iki 24 replikų blokus su šešiomis ankstesnėmis ir šešiomis
+paskesnėmis replikomis. Laiko tarpai yra apytikslis scenų skyrimo kriterijus;
+kalbėtojai automatiškai neatpažįstami. JSON išvestis tikrinama, kad nebūtų
+prarastų ar pasikartojančių subtitrų ID. Vertimo pažanga išsaugoma po kiekvieno
+bloko. Pasikeitus žinynui, epizodo pastaboms ar modeliui, rinkis naują išvesties
+katalogą: sena išvestis nebus automatiškai perrašyta. Modelis iškraunamas prieš
+Demucs ar OmniVoice darbą, kad nereikėtų visų modelių vienu metu talpinti GPU.
+
+`--translator nllb` palieka ankstesnį pažodinį vertimą po vieną repliką; šį
+parametrą naudok ir tęsiant seną NLLB išvestį. Vertimą, linksnius, tarimą ir
+trumpas ar kelių kalbėtojų japoniškas nuorodas vis tiek reikia peržiūrėti.
+Dainos bei ekrano užrašai lieka japoniški. Naujas automatinis variantas dar
+nepakeičia rankinės peržiūros, naudotos priimtame 149 epizode.
+
+Patikra su užblokuotu išoriniu tinklu:
+
+```bash
+unshare -Urn tools/Applio/.venv/bin/python tests/test_local_dub.py
+```
+
+Toliau aprašyta ankstesnė RVC kryptis. Dabartinių priimtų rezultatų ir apribojimų šaltinis yra `HANDOFF.md`.
+
 > **Tikslas:** Automatizuotas retro animacinių serialų (pvz., *Dragon Ball Z*) ir TV laidų lietuviško įgarsinimo remasteris, apjungiantis aukščiausios kokybės vaizdo/garso šaltinius su nostalgišku 1990-ųjų TV diktoriaus tembru ir **100% taisyklingu lietuvišku kirčiavimu bei natūralia intonacija**.
 
 ---
