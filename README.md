@@ -44,6 +44,42 @@ yra `output/gemini/NNN/<versija>/index.html` ir MP4. Ta pati video/vertimo versi
 tęsiama; pakeitus vertimą ar video sukuriama nauja versija ir ankstesnė išsaugoma.
 Tik teksto patikrai galima naudoti `--review-only`, nepradedant garso generavimo.
 
+Greičio bandymui naudok atskirą greitą variantą:
+
+```bash
+unshare -Urn tools/Applio/.venv/bin/python dub_gemini.py 86 --fast
+```
+
+`--fast` naudoja vietinį Whisper `base`, 24 balso generavimo žingsnius ir praleidžia
+sugeneruotos kalbos patikrą. Vertimas nesikeičia, tačiau balso kokybė bei japoniškų
+nuorodų atpažinimas gali pablogėti. Baigti įgarsinimai išsaugomi; nustatymai įtraukiami
+į naujos išvesties versiją. Japoniško garso ištraukimas ir atskyrimas pakartotinai
+naudojami, jei yra to paties nepakeisto video išvestyje. Jau sugeneruoti tinkamų
+nustatymų balsai naudojami be modelio įkėlimo.
+
+Pasirinktinai: `--fast --reference-model large-v3` išlaiko stipresnį nuorodų
+atpažinimą; `--fast --steps 16` mažina žingsnių skaičių; `--fast --batch-size 2`
+generuoja po dvi replikas. Mūsų keturių replikų RTX 4060 bandyme 24 žingsniai
+po vieną buvo greitesni nei poromis, todėl porinis generavimas nėra numatytasis.
+Trūkstant GPU atminties porinis generavimas automatiškai grįžta prie vienos replikos.
+UI po paleidimo iš naujo turi pasirenkamą „Fast variant“ laukelį.
+
+Baigto įgarsinimo peržiūros puslapyje galima redaguoti kiekvienos replikos tekstą
+ir spausti „Regenerate this line“. Sukuriamas naujas atskiras balso variantas su
+tuo pačiu japonišku balso pavyzdžiu ir kitu atsitiktiniu generavimo seed.
+Perklausyk variantus, pasirink „Use this take“, tada „Rebuild video with selected takes“.
+Teksto pataisos pritaikomos tik sugeneravus ir pasirinkus naują variantą.
+Atkuriant video kitos replikos nepergeneruojamos; originalūs klipai, tekstas ir
+baigtas video lieka išsaugoti. Naujas video turi atskirą nuorodą, o ankstesnius
+variantus galima pasirinkti vėl. Vienu metu vykdomas vienas generavimo arba
+renderio darbas. Peržiūros valdikliai veikia per vietinį `gemini_ui.py` serverį,
+taip pat ir anksčiau sukurtuose peržiūros puslapiuose.
+
+Kiekvienos replikos variantų sąraše galima rinktis „Original Japanese“.
+Perklausomas atitinkamas originalaus japoniško garso momentas. Spausk „Use this take“
+ir atkurk video: toje replikoje liks japoniškas garsas. Lietuviškas klipas ir tekstas
+išsaugomi, todėl net naujo video peržiūroje galima grįžti prie lietuviško varianto.
+
 Jei japoniškos replikos nepavyksta patikimai atpažinti, programa automatiškai
 palieka originalų japonišką garsą ir tęsia darbą. Praleistos replikos bei jų
 lietuviškas tekstas išsaugomi `skipped_references.json`. Gemini įgarsinimui naudojamas

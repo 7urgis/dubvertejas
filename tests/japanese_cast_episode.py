@@ -14,6 +14,7 @@ import re
 import shutil
 import subprocess
 import sys
+import time
 
 os.environ['HF_HUB_OFFLINE']='1'
 os.environ['TRANSFORMERS_OFFLINE']='1'
@@ -43,45 +44,85 @@ def validated(path):
     return audio, sr
 
 
-def fingerprint(row):
-    return hashlib.sha256(json.dumps({k:row.get(k) for k in ('lt','reference','reference_text','speaker','reuse_preview_idx')}, sort_keys=True).encode()).hexdigest()
+def fingerprint(row, steps=32, batch_size=1):
+    data={k:row.get(k) for k in ('lt','reference','reference_text','speaker','reuse_preview_idx')}
+    if 'generation_seed' in row:data['generation_seed']=row['generation_seed']
+    if (steps,batch_size)!=(32,1):data.update(steps=steps,batch_size=batch_size)
+    return hashlib.sha256(json.dumps(data,sort_keys=True).encode()).hexdigest()
 
 
-def generate(rows, repairs):
+def generate(rows, repairs, steps=32, batch_size=1):
+    rows=[r for r in rows if not r.get('keep_japanese')]
     if not rows:return
+    generated=OUT/'generated';generated.mkdir(exist_ok=True)
+    settings_path=OUT/'generation.json'
+    saved=json.loads(settings_path.read_text()) if settings_path.exists() else {}
+    pending=[]
+    for r in rows:
+        key=str(r['idx']);path=generated/f'line_{r["idx"]:03d}.wav'
+        if path.exists() and saved.get(key,{}).get('fingerprint')==fingerprint(r,steps,batch_size) and r['idx'] not in repairs:
+            validated(path)
+        else:pending.append(r)
+    if not pending:
+        print('All generated voices cached; no model loading needed',flush=True)
+        return
     import torch
     from omnivoice import OmniVoice
-    generated = OUT / 'generated';generated.mkdir(exist_ok=True)
-    settings_path = OUT / 'generation.json'
-    saved = json.loads(settings_path.read_text()) if settings_path.exists() else {}
-    model = OmniVoice.from_pretrained('k2-fsa/OmniVoice', device_map='cuda:0', dtype=torch.float16)
-    prompts = {}
-    for n, r in enumerate(rows, 1):
-        i=r['idx'];key=str(i);path=generated/f'line_{i:03d}.wav';stamp=fingerprint(r)
-        if path.exists() and saved.get(key,{}).get('fingerprint')==stamp and i not in repairs:
-            validated(path);continue
-        if r.get('reuse_preview_idx') and i not in repairs:
-            original=ROOT/'output/krillin_japanese_lt_test'/f'lt_{r["reuse_preview_idx"]}_take_2.wav'
-            shutil.copyfile(original,path)
-            saved[key]=dict(fingerprint=stamp,reused=str(original),take=2)
-            print(f'{n}/{len(rows)} Reused preferred Krillin take 2, #{i}',flush=True)
-        else:
+    model=OmniVoice.from_pretrained('k2-fsa/OmniVoice',device_map='cuda:0',dtype=torch.float16)
+    prompts={}
+
+    def store(r,audio,metadata):
+        peak=float(np.max(np.abs(audio)))
+        if len(audio)<model.sampling_rate/4 or not np.isfinite(audio).all() or peak<=0.001:
+            raise ValueError(f'Invalid generation #{r["idx"]}')
+        path=generated/f'line_{r["idx"]:03d}.wav'
+        if r['idx'] in repairs and path.exists():shutil.copyfile(path,generated/f'previous_{r["idx"]:03d}.wav')
+        sf.write(path,audio*min(1,0.95/peak),model.sampling_rate)
+        saved[str(r['idx'])]=dict(metadata,fingerprint=fingerprint(r,steps,batch_size),seconds=len(audio)/model.sampling_rate,
+            sha256=hashlib.sha256(path.read_bytes()).hexdigest(),repair=r['idx'] in repairs)
+        write(settings_path,saved)
+
+    def run_batch(batch):
+        for r in batch:
             reference=r['reference']
             if reference not in prompts:
                 prompts[reference]=model.create_voice_clone_prompt(ref_audio=reference,ref_text=r['reference_text'])
-            seed=1042+i+(1000 if i in repairs else 0)
-            if i in repairs and path.exists():shutil.copyfile(path,generated/f'previous_{i:03d}.wav')
-            torch.manual_seed(seed)
-            print(f'{n}/{len(rows)} #{i} {r["speaker"]}: {r["lt"]}',flush=True)
-            audio=model.generate(text=r['lt'],language='lt',voice_clone_prompt=prompts[reference],num_step=32)[0]
-            peak=float(np.max(np.abs(audio)))
-            if len(audio)<model.sampling_rate/4 or not np.isfinite(audio).all() or peak<=0.001:
-                raise ValueError(f'Invalid generation #{i}')
-            sf.write(path,audio*min(1,0.95/peak),model.sampling_rate)
-            saved[key]=dict(fingerprint=stamp,seed=seed,steps=32,repair=i in repairs)
-        audio,sr=validated(path);saved[key]['seconds']=len(audio)/sr
-        saved[key]['sha256']=hashlib.sha256(path.read_bytes()).hexdigest()
-        write(settings_path,saved)
+        seed=batch[0].get('generation_seed',1042+batch[0]['idx']+(1000 if batch[0]['idx'] in repairs else 0))
+        torch.manual_seed(seed)
+        print(f'Generating {len(batch)} line(s), {steps} steps: '+', '.join(str(r['idx']) for r in batch),flush=True)
+        started=time.perf_counter()
+        try:
+            audio=model.generate(text=[r['lt'] for r in batch],language='lt',
+                voice_clone_prompt=[prompts[r['reference']] for r in batch],num_step=steps)
+        except torch.cuda.OutOfMemoryError:
+            if len(batch)==1:raise
+            audio=None
+        if audio is None:
+            # Retry after the exception scope releases tensors retained by its traceback.
+            torch.cuda.empty_cache()
+            print('Batch exceeds GPU memory; retrying one line at a time',flush=True)
+            for r in batch:run_batch([r])
+            return
+        if len(audio)!=len(batch):raise ValueError('Generation returned the wrong number of lines')
+        elapsed=time.perf_counter()-started
+        for r,wave in zip(batch,audio):
+            store(r,wave,dict(seed=seed,steps=steps,batch_ids=[x['idx'] for x in batch],batch_seconds=elapsed))
+        print(f'Batch completed in {elapsed:.2f}s',flush=True)
+
+    # ponytail: batch size capped at 2 for the 8 GB GPU; larger batches need a separate memory benchmark.
+    fresh=[]
+    for r in pending:
+        if r.get('reuse_preview_idx') and r['idx'] not in repairs and (steps,batch_size)==(32,1):
+            original=ROOT/'output/krillin_japanese_lt_test'/f'lt_{r["reuse_preview_idx"]}_take_2.wav'
+            wave,sr=validated(original)
+            assert sr==model.sampling_rate
+            path=generated/f'line_{r["idx"]:03d}.wav'
+            shutil.copyfile(original,path)
+            saved[str(r['idx'])]=dict(fingerprint=fingerprint(r),reused=str(original),take=2,steps=32,
+                seconds=len(wave)/sr,sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+            write(settings_path,saved)
+        else:fresh.append(r)
+    for start in range(0,len(fresh),batch_size):run_batch(fresh[start:start+batch_size])
 
 
 def normalized(text):
@@ -89,6 +130,7 @@ def normalized(text):
 
 
 def speech_check(rows, device='cpu'):
+    rows=[r for r in rows if not r.get('keep_japanese')]
     if not rows:return
     if device=='cuda':
         import torch
@@ -118,10 +160,14 @@ def timestamp(seconds):
     return f'{ms//3600000:02d}:{ms//60000%60:02d}:{ms//1000%60:02d}.{ms%1000:03d}'
 
 
-def render(rows):
+def render(rows, steps=32, batch_size=1, skip_speech_check=False):
+    review_rows=rows
+    japanese_rows=[r for r in rows if r.get('keep_japanese')]
+    rows=[r for r in rows if not r.get('keep_japanese')]
     sr=24000;canvas=np.zeros(round(DURATION*sr),dtype=np.float32);placements=[]
     skipped_path=OUT/'skipped_references.json'
     skipped=json.loads(skipped_path.read_text()) if skipped_path.exists() else []
+    skipped+=japanese_rows
     fitted=OUT/'fitted';fitted.mkdir(exist_ok=True)
     for n,r in enumerate(rows):
         path=OUT/'generated'/f'line_{r["idx"]:03d}.wav';audio,actual=validated(path)
@@ -172,7 +218,7 @@ def render(rows):
     assert sum(s['codec_type']=='audio' for s in probe['streams'])==1
     ffmpeg('-i',video,'-map','0:a:0','-f','null','-')
     for name in (('ai_voice.flac','background.flac','mixed.flac') if rows else ('background.flac','mixed.flac')):validated(OUT/name)
-    checks=json.loads((OUT/'speech_check.json').read_text()) if (OUT/'speech_check.json').exists() else {}
+    checks=json.loads((OUT/'speech_check.json').read_text()) if not skip_speech_check and (OUT/'speech_check.json').exists() else {}
     captions=['WEBVTT\n'];page=['<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">',
         '<title>Japanese voices speaking Lithuanian</title>',
         '<style>body{font:17px system-ui;max-width:1100px;margin:32px auto;padding:16px;background:#141821;color:#eee}video{width:100%}audio{max-width:100%}a{color:#9bd}td,th{padding:10px;text-align:left;vertical-align:top}table{width:100%}button{font:inherit}</style>',
@@ -182,10 +228,13 @@ def render(rows):
         '<p><a href="'+video.name+'">Download video</a></p><h2>Dry AI voices</h2><audio controls preload="none" src="ai_voice.flac"></audio>',
         '<h2>Original Japanese soundtrack</h2><audio controls preload="none" src="japanese.wav"></audio>',
         '<h2>Dialogue review</h2><table><thead><tr><th>Time / character</th><th>Text</th><th>Dry voice / reference</th></tr></thead><tbody>']
-    for r in rows:
-        i=r['idx'];captions.append(f'{i}\n{timestamp(r["start_sec"])} --> {timestamp(r["end_sec"])}\n{r["lt"]}\n')
+    if skip_speech_check:page.insert(6,'<p>Generated speech checking was skipped for this render. Listen for missing or incorrect words.</p>')
+    for r in review_rows:
+        i=r['idx']
+        if not r.get('keep_japanese'):captions.append(f'{i}\n{timestamp(r["start_sec"])} --> {timestamp(r["end_sec"])}\n{r["lt"]}\n')
         flag=checks.get(str(i),{})
         note=r.get('review_note','')
+        if r.get('keep_japanese'):note+=' Original Japanese selected for this line.'
         if flag.get('review'):note+=' Automatic recognition flagged this take; this is not a listening verdict.'
         reference=Path(r['reference']).relative_to(OUT).as_posix()
         page.append(f'<tr><td><button type="button" data-time="{r["start_sec"]}">{timestamp(r["start_sec"])}</button><br>{html.escape(r["speaker"])}</td><td lang="lt">{html.escape(r["lt"])}<p lang="en">{html.escape(r["en"])}</p><small lang="en">{html.escape(note)}</small></td><td><audio controls preload="none" src="generated/line_{i:03d}.wav" aria-label="Lithuanian line {i}"></audio><br><audio controls preload="none" src="{reference}" aria-label="Japanese reference for line {i}"></audio></td></tr>')
@@ -193,10 +242,10 @@ def render(rows):
     (OUT/'index.html').write_text('\n'.join(page),encoding='utf-8');(OUT/'transcript.vtt').write_text('\n'.join(captions),encoding='utf-8')
     write(OUT/'verification.json',dict(duration=DURATION,lines=len(rows),speakers=sorted({r['speaker'] for r in rows}),
         finite_non_silent_audio=True,video_duration=float(probe['format']['duration']),audio_streams=1,
-        decode_passed=True,max_tempo=max((p['speed'] for p in placements),default=1),recognition_review_ids=[int(i) for i,r in checks.items() if r['review']]))
-    write(OUT/'settings.json',dict(video=str(SOURCE),model='k2-fsa/OmniVoice',steps=32,language='lt',seed_pattern='1042 + first subtitle ID; preferred take 2',
+        decode_passed=True,speech_check_skipped=skip_speech_check,max_tempo=max((p['speed'] for p in placements),default=1),recognition_review_ids=[int(i) for i,r in checks.items() if r['review']]))
+    write(OUT/'settings.json',dict(video=str(SOURCE),model='k2-fsa/OmniVoice',steps=steps,batch_size=batch_size,speech_check_skipped=skip_speech_check,language='lt',seed_pattern='1042 + first subtitle ID; preferred take 2',
         translation='Lithuanian input transcript; see preparation.json for automatic translation provenance',reference_source='Japanese vocals separated with htdemucs',
-        reference_transcription='Whisper large-v3, Japanese; ASR not fully listening-verified',
+        reference_transcription='Local Whisper, Japanese; see preparation.json for the model; ASR not fully listening-verified',
         mix='original Japanese outside dialogue; no-vocals Japanese inside dialogue; bg 0.65, voice 1.3, limiter 0.95',
         generation='Natural timing; tempo fitting only when speech exceeds scene space',preferred_preview_take=2))
     print(f'Complete: {OUT/"index.html"}',flush=True)
@@ -204,16 +253,21 @@ def render(rows):
 
 def main():
     global SOURCE, OUT, DURATION
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--stage',choices=('generate','check','render','all'),required=True);parser.add_argument('--repair',type=int,nargs='*',default=[]);parser.add_argument('--video',type=Path,default=SOURCE);parser.add_argument('--out-dir',type=Path,default=OUT);parser.add_argument('--asr-device',choices=('cpu','cuda'),default='cpu');args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--stage',choices=('generate','check','render','all'),required=True);parser.add_argument('--repair',type=int,nargs='*',default=[]);parser.add_argument('--video',type=Path,default=SOURCE);parser.add_argument('--out-dir',type=Path,default=OUT);parser.add_argument('--asr-device',choices=('cpu','cuda'),default='cpu')
+    parser.add_argument('--steps',type=int,choices=(16,24,32),default=32)
+    parser.add_argument('--batch-size',type=int,choices=(1,2),default=1)
+    parser.add_argument('--skip-speech-check',action='store_true')
+    args=parser.parse_args()
     if args.asr_device=='cuda':
         sys.path.insert(0,str(ROOT))
         from dub_local import enable_cuda_asr
         enable_cuda_asr()
     SOURCE=args.video.resolve();OUT=args.out_dir.resolve()
     if not SOURCE.is_file():raise FileNotFoundError(SOURCE)
-    if OUT!=(ROOT/'output/omnivoice_149_japanese_cast').resolve() and (OUT/'settings.json').exists():
+    if (OUT/'settings.json').exists():
         previous=json.loads((OUT/'settings.json').read_text())
         if previous.get('video') and previous['video']!=str(SOURCE):raise ValueError('Use a fresh output directory for another video')
+        if (previous.get('steps',32),previous.get('batch_size',1),previous.get('speech_check_skipped',False))!=(args.steps,args.batch_size,args.skip_speech_check):raise ValueError('Voice settings changed; use a fresh output directory to preserve the finished render')
     if SOURCE.name!='Dragon.Ball.Z.149.480p.DBox.DVD.REGRADE.LT-ENG-JAP.FLAC2.0.x264-SoM-7urgis.mkv' and OUT==(ROOT/'output/omnivoice_149_japanese_cast').resolve():raise ValueError('Use a separate --out-dir to preserve episode 149')
     DURATION=float(subprocess.check_output(['ffprobe','-v','error','-show_entries','format=duration','-of','default=noprint_wrappers=1:nokey=1',str(SOURCE)]))
     rows=json.loads((OUT/'transcript.json').read_text());seen=set()
@@ -231,9 +285,9 @@ def main():
             anchor=next(x for x in rows if x['idx']==r['reference_anchor_idx'])
             assert anchor['speaker']==r['speaker']
     assert set(args.repair)<=seen
-    if args.stage in ('generate','all'):generate(rows,set(args.repair))
-    if args.stage in ('check','all'):speech_check(rows,args.asr_device)
-    if args.stage in ('render','all'):render(rows)
+    if args.stage in ('generate','all'):generate(rows,set(args.repair),args.steps,args.batch_size)
+    if args.stage=='check' or (args.stage=='all' and not args.skip_speech_check):speech_check(rows,args.asr_device)
+    if args.stage in ('render','all'):render(rows,args.steps,args.batch_size,args.skip_speech_check)
 
 
 if __name__=='__main__':main()

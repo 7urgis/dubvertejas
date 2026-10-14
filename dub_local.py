@@ -27,6 +27,7 @@ os.environ['HF_DATASETS_OFFLINE'] = '1'
 
 ROOT = Path(__file__).resolve().parent
 REFERENCE_POLICY = 'reliable-separated-speech-v1'
+FAST_OPTIONS = dict(reference_model='base', steps=24, batch_size=1, skip_speech_check=True)
 
 
 def reference_text(segments):
@@ -381,7 +382,7 @@ def imported_transcript(path, duration):
     return rows
 
 
-def prepare(video, out, translator='qwen', model='qwen3:8b', glossary_path=None, episode_context_path=None, translate_only=False, translation_file=None, transcript_file=None, asr_device='cpu'):
+def prepare(video, out, translator='qwen', model='qwen3:8b', glossary_path=None, episode_context_path=None, translate_only=False, translation_file=None, transcript_file=None, asr_device='cpu', reference_model='large-v3'):
     glossary = glossary_path.read_text(encoding='utf-8') if glossary_path else ''
     episode_context = episode_context_path.read_text(encoding='utf-8') if episode_context_path else ''
     profile = dict(backend=translator, model=model if translator=='qwen' else 'facebook/nllb-200-distilled-600M',
@@ -400,10 +401,12 @@ def prepare(video, out, translator='qwen', model='qwen3:8b', glossary_path=None,
         legacy_nllb = translator=='nllb' and previous.get('translation_model')=='facebook/nllb-200-distilled-600M' and 'translation_profile' not in previous
         if previous.get('translation_profile')!=profile and not legacy_nllb:
             raise ValueError('Translator, glossary or episode context changed; use a new output directory to preserve the existing result')
+        if previous.get('reference_model','large-v3')!=reference_model:
+            raise ValueError('Reference model changed; use a new output directory')
     elif any(out.iterdir()):
         raise ValueError('Use a fresh output directory; existing files have no preparation manifest')
     else:
-        save_json(manifest, dict(source=identity, status='preparing', translation_profile=profile))
+        save_json(manifest, dict(source=identity, status='preparing', translation_profile=profile, reference_model=reference_model))
     probe = json.loads(subprocess.check_output(['ffprobe', '-v', 'error', '-show_streams', '-show_format', '-of', 'json', str(video)]))
     japanese = [s for s in probe['streams'] if s['codec_type']=='audio' and s.get('tags', {}).get('language') in ('jpn', 'ja')]
     english = [s for s in probe['streams'] if s['codec_type']=='subtitle' and s.get('tags', {}).get('language')=='eng' and 'Basic Subtitles' in s.get('tags', {}).get('title', '')]
@@ -433,7 +436,7 @@ def prepare(video, out, translator='qwen', model='qwen3:8b', glossary_path=None,
     (out/'glossary.md').write_text(glossary, encoding='utf-8')
     (out/'episode_context.md').write_text(episode_context, encoding='utf-8')
     review_translation(rows, out)
-    save_json(manifest, dict(source=identity, status='translated', offline=True, translation_profile=profile, translation_model=profile['model']))
+    save_json(manifest, dict(source=identity, status='translated', offline=True, translation_profile=profile, translation_model=profile['model'], reference_model=reference_model))
     if translate_only:
         return
     if not (out/'japanese.wav').exists():
@@ -473,7 +476,7 @@ def prepare(video, out, translator='qwen', model='qwen3:8b', glossary_path=None,
         reference = refs/(f'subtitle_{cue["idx"]:03d}.wav' if transcript_file else f'line_{r["idx"]:03d}.wav')
         run('ffmpeg', '-v', 'error', '-y', '-ss', start, '-i', stem, '-t', end-start, '-af', 'highpass=f=70', '-ar', '24000', '-ac', '1', reference)
         if whisper is None:
-            whisper = WhisperModel('large-v3', device=asr_device, compute_type='int8_float16' if asr_device=='cuda' else 'int8', cpu_threads=8, local_files_only=True)
+            whisper = WhisperModel(reference_model, device=asr_device, compute_type='int8_float16' if asr_device=='cuda' else 'int8', cpu_threads=8, local_files_only=True)
         text = '';audio_source='japanese_vocals'
         attempts=((False,True),(False,False)) if translation_file else ((False,True),(False,False),(True,False))
         for original_audio,vad in attempts:
@@ -499,7 +502,7 @@ def prepare(video, out, translator='qwen', model='qwen3:8b', glossary_path=None,
     del whisper;gc.collect()
     review_translation(rows,out)
     save_json(manifest, dict(source=identity, status='prepared', offline=True, translation_profile=profile,
-        reference_policy=REFERENCE_POLICY, skipped_reference_ids=[r['idx'] for r in skipped],
+        reference_policy=REFERENCE_POLICY, reference_model=reference_model, skipped_reference_ids=[r['idx'] for r in skipped],
         translation_model=profile['model'], reference_method='Each Japanese subtitle scene; no speaker diarization',
         limitations='Automatic first draft. Short/multi-speaker references and translations require review. Songs/on-screen titles preserved in Japanese.'))
 
@@ -518,6 +521,10 @@ def main():
     parser.add_argument('--translate-only', action='store_true', help='Translate and build a text review page without audio processing')
     parser.add_argument('--prepare-only', action='store_true', help='Prepare editable translations and references without generating the dub')
     parser.add_argument('--asr-device', choices=('cpu','cuda'), default='cpu', help='Whisper device for Japanese references and generated-speech checks')
+    parser.add_argument('--reference-model', choices=('large-v3','base'), default='large-v3', help='Cached Whisper model for Japanese references')
+    parser.add_argument('--steps', type=int, choices=(16,24,32), default=32)
+    parser.add_argument('--batch-size', type=int, choices=(1,2), default=1)
+    parser.add_argument('--skip-speech-check', action='store_true')
     args = parser.parse_args();video=args.video.resolve();out=args.out_dir.resolve()
     if args.asr_device=='cuda':enable_cuda_asr()
     if not video.is_file():
@@ -530,12 +537,15 @@ def main():
         match = re.search(r'\.(\d{3})\.', video.name)
         candidate = ROOT/'data/context'/f'ep{match[1]}_lt.md' if match else None
         episode_context = candidate if candidate and candidate.is_file() else None
-    prepare(video, out, args.translator, args.translation_model, args.glossary, episode_context, args.translate_only, args.translation_file, args.transcript_file, args.asr_device)
+    prepare(video, out, args.translator, args.translation_model, args.glossary, episode_context, args.translate_only, args.translation_file, args.transcript_file, args.asr_device, args.reference_model)
     if not args.prepare_only and not args.translate_only:
+        command=[sys.executable,str(ROOT/'tests/japanese_cast_episode.py'),'--video',str(video),'--out-dir',str(out),'--stage','all',
+            '--asr-device',args.asr_device,'--steps',str(args.steps),'--batch-size',str(args.batch_size)]
+        if args.skip_speech_check:command.append('--skip-speech-check')
         if args.asr_device=='cuda':
             # Replace this process so CTranslate2 releases GPU allocations before OmniVoice loads.
-            os.execv(sys.executable,[sys.executable,str(ROOT/'tests/japanese_cast_episode.py'),'--video',str(video),'--out-dir',str(out),'--stage','all','--asr-device','cuda'])
-        run(sys.executable, ROOT/'tests/japanese_cast_episode.py', '--video', video, '--out-dir', out, '--stage', 'all','--asr-device',args.asr_device)
+            os.execv(sys.executable,command)
+        run(*command)
     print(f'Output: {out}', flush=True)
 
 

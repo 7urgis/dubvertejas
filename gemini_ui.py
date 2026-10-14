@@ -13,10 +13,11 @@ import sys
 import tempfile
 import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from urllib.parse import unquote, urlparse
+from urllib.parse import unquote, urlparse, parse_qs
 
-from dub_gemini import episode_files, export_package, output_directory, translation_file
+from dub_gemini import episode_files, export_package, output_directory, translation_file, FAST_OPTIONS
 from dub_local import ROOT, dialogue_rows, import_translation, subtitle_rows
+from dub_review import output_path, review_data, select_take, regeneration_request, rebuild_request
 
 LOCK=threading.RLock()
 JOB=dict(state='idle',episode=None,output=None,log=None)
@@ -35,6 +36,7 @@ body{font:17px system-ui;background:#151922;color:#edf0f4;max-width:1200px;margi
 <label for="translation">Gemini translation — SRT with original subtitle IDs and timestamps</label>
 <textarea id="translation" placeholder="Paste the complete Lithuanian SRT translation here" spellcheck="false"></textarea>
 </div></div>
+<label><input id="fast" type="checkbox"> Fast variant: faster reference recognition, 24 voice steps, no speech check. Quality may differ.</label>
 <button id="save">Save and validate</button><button id="start">Start dubbing</button>
 <p id="message" role="status" aria-live="polite"></p>
 <h2>Progress</h2><p id="state" role="status" aria-live="polite">Idle</p><p id="result"></p><pre id="log" aria-label="Dubbing log"></pre>
@@ -51,7 +53,7 @@ $('refresh').onclick=()=>scan().catch(e=>$('message').textContent=e.message);
 $('retrieve').onclick=()=>action($('retrieve'),'/api/export',{episode:episode()});
 $('copy').onclick=async()=>{if(!$('english').value){$('message').textContent='Extract the embedded subtitles first.';return;}try{await navigator.clipboard.writeText($('english').value);$('message').textContent='English SRT copied, including IDs and timestamps.';}catch(error){$('english').focus();$('english').select();$('message').textContent='Press Ctrl+C to copy the selected English SRT.';}};
 $('save').onclick=()=>action($('save'),'/api/save',{episode:episode(),text:$('translation').value});
-$('start').onclick=()=>action($('start'),'/api/start',{episode:episode(),text:$('translation').value});
+$('start').onclick=()=>action($('start'),'/api/start',{episode:episode(),text:$('translation').value,fast:$('fast').checked});
 async function status(){try{const data=await api('/api/status');$('state').textContent=data.state+(data.episode?' — episode '+data.episode:'');$('log').textContent=data.log_text||'';$('start').disabled=data.state==='running';$('save').disabled=data.state==='running';$('result').replaceChildren();if(data.output){const a=document.createElement('a');a.href=data.output+'/index.html';a.textContent=data.state==='complete'?'Open completed video':'Output: '+data.output;if(data.state==='complete')$('result').append(a);}}catch(error){$('state').textContent='UI connection lost. '+error.message;}}
 scan().catch(e=>$('message').textContent=e.message);status();setInterval(status,2000);
 </script></html>'''
@@ -79,14 +81,16 @@ def save_translation(episode,text):
     return video,destination,len(checked)
 
 
-def work(episode,log):
+def work(episode,log,fast=False,custom_command=None):
     global PROCESS
     state='failed';code=None
     try:
         with log.open('a') as stream:
             with LOCK:
                 if JOB['state']!='running':return
-                PROCESS=subprocess.Popen(['unshare','-Urn',sys.executable,str(ROOT/'dub_gemini.py'),str(episode)],cwd=ROOT,
+                command=custom_command or ['unshare','-Urn',sys.executable,str(ROOT/'dub_gemini.py'),str(episode)]
+                if fast and custom_command is None:command.append('--fast')
+                PROCESS=subprocess.Popen(command,cwd=ROOT,
                     stdout=stream,stderr=subprocess.STDOUT,start_new_session=True)
                 process=PROCESS
             code=process.wait()
@@ -109,6 +113,11 @@ class Handler(BaseHTTPRequestHandler):
     def reply(self,data,status=200):
         payload=json.dumps(data,ensure_ascii=False).encode()
         self.send_response(status);self.send_header('Content-Type','application/json; charset=utf-8');self.send_header('Content-Length',str(len(payload)));self.end_headers();self.wfile.write(payload)
+
+    def html(self,text):
+        payload=text.encode();self.send_response(200);self.send_header('Content-Type','text/html; charset=utf-8')
+        self.send_header('Cache-Control','no-store');self.send_header('Content-Length',str(len(payload)))
+        self.end_headers();self.wfile.write(payload)
 
     def file(self,path,download=False):
         if not path.is_file():self.send_error(404);return
@@ -139,7 +148,12 @@ class Handler(BaseHTTPRequestHandler):
         route=urlparse(self.path)
         try:
             if route.path=='/':
-                payload=PAGE.encode();self.send_response(200);self.send_header('Content-Type','text/html; charset=utf-8');self.send_header('Content-Length',str(len(payload)));self.end_headers();self.wfile.write(payload)
+                self.html(PAGE)
+            elif route.path=='/review_editor.js':
+                self.file(ROOT/'review_editor.js')
+            elif route.path=='/api/review':
+                name=parse_qs(route.query)['output'][0]
+                self.reply(review_data(output_path(name)))
             elif route.path=='/api/episodes':
                 episodes=[]
                 for video in sorted((ROOT/'media').glob('Dragon.Ball.Z.*LT-ENG-JAP*.mkv')):
@@ -147,7 +161,6 @@ class Handler(BaseHTTPRequestHandler):
                     if match:episodes.append(dict(episode=int(match[1]),video=video.name))
                 self.reply(dict(episodes=episodes))
             elif route.path=='/api/translation':
-                from urllib.parse import parse_qs
                 episode=int(parse_qs(route.query)['episode'][0]);_,folder=episode_files(episode)
                 existing=[p for p in (folder/'translation.srt',folder/'translation.txt') if p.is_file()]
                 self.reply(dict(text=existing[0].read_text(encoding='utf-8-sig') if len(existing)==1 else '',english=(folder/'english.srt').read_text(encoding='utf-8-sig') if (folder/'english.srt').is_file() else '',files=[name for name in ('english.srt','glossary.md','episode_context.md','prompt.txt') if (folder/name).is_file()]))
@@ -164,7 +177,9 @@ class Handler(BaseHTTPRequestHandler):
             elif route.path.startswith('/output/gemini/'):
                 path=(ROOT/unquote(route.path).lstrip('/')).resolve()
                 if not path.is_relative_to((ROOT/'output/gemini').resolve()):raise ValueError('Invalid output path')
-                self.file(path)
+                if path.name=='index.html' and (path.parent/'settings.json').is_file() and (path.parent/'transcript.json').is_file():
+                    self.html(path.read_text()+'\n<script src="/review_editor.js" defer></script>')
+                else:self.file(path)
             else:self.send_error(404)
         except (ValueError,KeyError,OSError,subprocess.SubprocessError) as error:self.reply(dict(error=str(error)),400)
 
@@ -176,20 +191,37 @@ class Handler(BaseHTTPRequestHandler):
             if not 0<length<=2_000_000:raise ValueError('Request is empty or larger than 2 MB')
             data=json.loads(self.rfile.read(length))
             if not isinstance(data,dict):raise ValueError('Expected a JSON object')
-            episode=data['episode']
-            if type(episode) is not int:raise ValueError('Episode must be an integer')
             with LOCK:
                 if JOB['state']=='running':self.reply(dict(error='A dubbing job is already running. Wait for it to finish.'),409);return
+                if self.path in ('/api/review/regenerate','/api/review/select','/api/review/rebuild'):
+                    name=data.get('output');out=output_path(name)
+                    if self.path=='/api/review/select':
+                        select_take(out,data.get('idx'),data.get('take'))
+                        self.reply(dict(message='Take selected. Rebuild the video to apply your choices.'));return
+                    if self.path=='/api/review/regenerate':
+                        request=regeneration_request(out,data.get('idx'),data.get('text'));destination=out;kind='regenerate'
+                    else:request,destination=rebuild_request(out);kind='rebuild'
+                    logs=ROOT/'output/gemini_ui_logs';logs.mkdir(parents=True,exist_ok=True);log=logs/(request.parent.name+'.log')
+                    command=['unshare','-Urn',sys.executable,str(ROOT/'dub_review.py'),'--request',str(request)]
+                    episode=int(name.split('/')[0])
+                    JOB.update(state='running',episode=episode,output='/'+str(destination.relative_to(ROOT)),log=str(log),returncode=None,
+                        kind=kind,review_output=name,idx=data.get('idx'))
+                    threading.Thread(target=work,args=(episode,log,False,command),daemon=True).start()
+                    self.reply(dict(message='Generating a new take…' if kind=='regenerate' else 'Rebuilding a separate video…'));return
+                episode=data['episode']
+                if type(episode) is not int:raise ValueError('Episode must be an integer')
                 if self.path=='/api/export':
                     video,folder=episode_files(episode);export_package(video,folder,episode)
                     self.reply(dict(message='Embedded English subtitles extracted. Copy the full SRT on the left into Gemini.',english=(folder/'english.srt').read_text(encoding='utf-8-sig'),files=[name for name in ('english.srt','glossary.md','episode_context.md','prompt.txt') if (folder/name).is_file()]));return
                 if self.path not in ('/api/save','/api/start'):self.send_error(404);return
                 video,translation,count=save_translation(episode,data.get('text'))
                 if self.path=='/api/save':self.reply(dict(message=f'Saved and validated {count} dialogue cues: {translation}'));return
-                out=output_directory(episode,video,translation)
+                fast=data.get('fast',False)
+                if type(fast) is not bool:raise ValueError('Fast variant must be true or false')
+                out=output_directory(episode,video,translation,options=FAST_OPTIONS if fast else None)
                 logs=ROOT/'output/gemini_ui_logs';logs.mkdir(parents=True,exist_ok=True);log=logs/f'{episode:03d}-{out.name}.log'
-                JOB.update(state='running',episode=episode,output='/'+str(out.relative_to(ROOT)),log=str(log),returncode=None)
-                threading.Thread(target=work,args=(episode,log),daemon=True).start()
+                JOB.update(state='running',episode=episode,output='/'+str(out.relative_to(ROOT)),log=str(log),returncode=None,kind='dub',review_output=None,idx=None)
+                threading.Thread(target=work,args=(episode,log,fast),daemon=True).start()
                 self.reply(dict(message=f'Started episode {episode:03d} with {count} Gemini dialogue cues.'))
         except (ValueError,KeyError,OSError,subprocess.SubprocessError) as error:self.reply(dict(error=str(error)),400)
 

@@ -90,4 +90,8 @@ with tempfile.TemporaryDirectory() as directory:
     background,_=sf.read(out/'background.flac');ai,aisr=sf.read(out/'ai_voice.flac')
     assert np.max(np.abs(background[sr:2*sr]-original[sr:2*sr]))<.0001
     assert not np.any(ai[aisr:2*aisr]), 'AI spilled into fallback window'
+    runner.render([row],steps=24,skip_speech_check=True)
+    assert json.loads((out/'verification.json').read_text())['speech_check_skipped']
+    assert json.loads((out/'settings.json').read_text())['steps']==24
+    assert 'speech checking was skipped' in (out/'index.html').read_text()
 print('Reference fallback and Japanese mix checks passed')
