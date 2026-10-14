@@ -1,0 +1,43 @@
+# Python & Environment
+.venv/
+venv/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Tools & Virtual environments
+tools/Applio/
+.venv/
+venv/
+
+# Working & Temporary Directories
+temp/
+output/
+media*
+data/demucs_output/
+*.tmp*
+
+# Heavy Media Files (Video & Raw Audio)
+*.mkv
+*.mp4
+*.avi
+*.flac
+*.wav
+*.mp3
+
+# Model Weights & Binaries (Over Git Limits)
+*.pth
+*.pt
+*.bin
+*.onnx
+*.safetensors
+*.index
+
+# OS & IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

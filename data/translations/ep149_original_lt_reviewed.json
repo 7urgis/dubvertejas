@@ -1,0 +1,776 @@
+[
+  {
+    "start_sec": 118.51,
+    "end_sec": 122.95,
+    "lt": "Pagaliau Son Gokas pasveiko, bet deja, gali būti per vėlu.",
+    "review_note": "Provisional ASR reconstruction; verify original Lithuanian wording.",
+    "source_asr": "Galo apsaugokas pasveiko, bet dėja gali būti per vėlų",
+    "idx": 1
+  },
+  {
+    "start_sec": 122.95,
+    "end_sec": 126.71000000000001,
+    "lt": "Pikolas jau stojo į kovą su žiauriausiais kiborgais.",
+    "review_note": "",
+    "source_asr": "Pikolas jau stojo į kovą su žiauriausiais kiburgais",
+    "idx": 2
+  },
+  {
+    "start_sec": 145.17000000000002,
+    "end_sec": 148.79,
+    "lt": "Tau nepavyko, bet smūgis buvo iš tiesų neprastas.",
+    "review_note": "",
+    "source_asr": "Tau nepavyko, bet smūgis buvo iš tiesų neprastas",
+    "idx": 3
+  },
+  {
+    "start_sec": 149.59,
+    "end_sec": 152.17000000000002,
+    "lt": "Tikroji kova tik prasideda.",
+    "review_note": "",
+    "source_asr": "Tikroji kova tik prasideda",
+    "idx": 4
+  },
+  {
+    "start_sec": 154.03,
+    "end_sec": 157.25,
+    "lt": "Tą kovinę energiją turbūt spinduliuoja Pikolas.",
+    "review_note": "",
+    "source_asr": "Ta kovinė energija turbūt spinduliuoja Pikolas",
+    "idx": 5
+  },
+  {
+    "start_sec": 157.25,
+    "end_sec": 160.27,
+    "lt": "Jis tikriausiai kaunasi su kiborgais.",
+    "review_note": "",
+    "source_asr": "Jis tikriausiai kaunasės o kiburgais",
+    "idx": 6
+  },
+  {
+    "start_sec": 160.27,
+    "end_sec": 164.57,
+    "lt": "Ką gi, aš esu galingesnis už jus visus.",
+    "review_note": "",
+    "source_asr": "Kągi, aš esu galingesnis už jūs visus",
+    "idx": 7
+  },
+  {
+    "start_sec": 172.38,
+    "end_sec": 175.01999999999998,
+    "lt": "Selas siekia tapti visagalis.",
+    "review_note": "",
+    "source_asr": "Selas siekia tapti visą galis",
+    "idx": 8
+  },
+  {
+    "start_sec": 175.01999999999998,
+    "end_sec": 178.12,
+    "lt": "Jis sparčiai artėja prie savo tikslo.",
+    "review_note": "Provisional ASR reconstruction; verify original Lithuanian wording.",
+    "source_asr": "Jis parčirtėja prie savo tikslo",
+    "idx": 9
+  },
+  {
+    "start_sec": 178.12,
+    "end_sec": 181.82,
+    "lt": "Pildosi didžiausi mūsų draugų nuogąstavimai.",
+    "review_note": "",
+    "source_asr": "Pildosi didžiausių mūsų draugų nuogą stavimai",
+    "idx": 10
+  },
+  {
+    "start_sec": 187.01999999999998,
+    "end_sec": 189.76,
+    "lt": "Selas netrukus taps visagalis.",
+    "review_note": "",
+    "source_asr": "Selas netrukus taps visą galis",
+    "idx": 11
+  },
+  {
+    "start_sec": 219.64,
+    "end_sec": 224.01999999999998,
+    "lt": "Tu galingas, nors neprilygsti kiborgams.",
+    "review_note": "Provisional ASR reconstruction; verify original Lithuanian wording.",
+    "source_asr": "Tau galingas, nors nepriniksti kivargams",
+    "idx": 12
+  },
+  {
+    "start_sec": 224.01999999999998,
+    "end_sec": 227.36,
+    "lt": "Bet nesi ir nelabasis Pikolas.",
+    "review_note": "",
+    "source_asr": "Bet nesi ir nelabasis pikolas",
+    "idx": 13
+  },
+  {
+    "start_sec": 227.36,
+    "end_sec": 233.73000000000002,
+    "lt": "Tu mūsų net nedomini.",
+    "review_note": "",
+    "source_asr": "Tu mūsų net nedomini",
+    "idx": 14
+  },
+  {
+    "start_sec": 233.73000000000002,
+    "end_sec": 236.39,
+    "lt": "Mums tereikia sužinoti, kur yra Son Gokas.",
+    "review_note": "",
+    "source_asr": "Mums te reikia sužinoti, kur yra Song Gokas",
+    "idx": 15
+  },
+  {
+    "start_sec": 236.39,
+    "end_sec": 238.83,
+    "lt": "Gal dabar jau pasakysi geruoju?",
+    "review_note": "",
+    "source_asr": "Gal dabar jau pasakysi geruoju?",
+    "idx": 16
+  },
+  {
+    "start_sec": 244.13,
+    "end_sec": 246.55,
+    "lt": "Jūs ketinate nužudyti Goką.",
+    "review_note": "",
+    "source_asr": "Jūs ketinate nužudyti Goka",
+    "idx": 17
+  },
+  {
+    "start_sec": 249.4,
+    "end_sec": 252.6,
+    "lt": "Nejau tikitės, jog pasakysiu, kur jis yra?",
+    "review_note": "Provisional ASR reconstruction; verify original Lithuanian wording.",
+    "source_asr": "Nejau teikytis, jog pasakysiu, kur jis yra",
+    "idx": 18
+  },
+  {
+    "start_sec": 254.28,
+    "end_sec": 256.03999999999996,
+    "lt": "Vadinasi, nori kautis toliau.",
+    "review_note": "",
+    "source_asr": "Vadinasi, nori gautis toliau",
+    "idx": 19
+  },
+  {
+    "start_sec": 258.15,
+    "end_sec": 260.07,
+    "lt": "Kol pats panorėsi jį išduoti.",
+    "review_note": "",
+    "source_asr": "Kol pats panorėsi jį išduoti",
+    "idx": 20
+  },
+  {
+    "start_sec": 263.72,
+    "end_sec": 265.48,
+    "lt": "Šį kartą mes nepasigailėsime.",
+    "review_note": "Provisional ASR reconstruction; verify original Lithuanian wording.",
+    "source_asr": "Šį kartą mes nepasigailėsiu.",
+    "idx": 21
+  },
+  {
+    "start_sec": 369.41,
+    "end_sec": 373.17,
+    "lt": "Tu greitas, bet smūgiuoji gana silpnai.",
+    "review_note": "",
+    "source_asr": "Tu greitas, bet smūgiuoji gana silpnai.",
+    "idx": 22
+  },
+  {
+    "start_sec": 374.63,
+    "end_sec": 375.25,
+    "lt": "Ką?",
+    "review_note": "",
+    "source_asr": "Ką?",
+    "idx": 23
+  },
+  {
+    "start_sec": 377.85,
+    "end_sec": 380.85,
+    "lt": "Nedrįsk menkinti septynioliktojo kiborgo galios.",
+    "review_note": "",
+    "source_asr": "Nedrįsk menkinti 17-ojo kibargo galios.",
+    "idx": 24
+  },
+  {
+    "start_sec": 381.39,
+    "end_sec": 384.41,
+    "lt": "Aš pats galingiausias kiborgas pasaulyje.",
+    "review_note": "",
+    "source_asr": "Aš pats galingiausias kibargos pasaulyje.",
+    "idx": 25
+  },
+  {
+    "start_sec": 437.71,
+    "end_sec": 439.61,
+    "lt": "Jis velniškai stiprus.",
+    "review_note": "",
+    "source_asr": "Jis vėl iškai stiprus.",
+    "idx": 26
+  },
+  {
+    "start_sec": 439.61,
+    "end_sec": 441.79,
+    "lt": "Beveik prilygsta septynioliktajam.",
+    "review_note": "",
+    "source_asr": "Beveik privyksta septynioliktajam.",
+    "idx": 27
+  },
+  {
+    "start_sec": 453.28,
+    "end_sec": 457.38,
+    "lt": "Pone Pikolai, nepasiduok tam niekšui.",
+    "review_note": "Provisional ASR reconstruction; verify original Lithuanian wording.",
+    "source_asr": "Pone Pikolai, nepasiduoktam niekšui.",
+    "idx": 28
+  },
+  {
+    "start_sec": 458.88,
+    "end_sec": 460.28,
+    "lt": "Pikolai, laikykis.",
+    "review_note": "",
+    "source_asr": "Pikolai, laikykis.",
+    "idx": 29
+  },
+  {
+    "start_sec": 460.84,
+    "end_sec": 463.7,
+    "lt": "Ištverk, kol Vedžitas su sūnumis baigs treniruotis.",
+    "review_note": "Provisional ASR reconstruction; verify original Lithuanian wording.",
+    "source_asr": "Ištverk, kol vedžiutės susunomis, baig striniruotis.",
+    "idx": 30
+  },
+  {
+    "start_sec": 586.85,
+    "end_sec": 589.4100000000001,
+    "lt": "Prakeikimas, kiek dar salų jie suniokos?",
+    "review_note": "Provisional ASR reconstruction; verify original Lithuanian wording.",
+    "source_asr": "Prakeikimas, kiek dar salų jie suniokos.",
+    "idx": 31
+  },
+  {
+    "start_sec": 608.99,
+    "end_sec": 611.1700000000001,
+    "lt": "Regis, Pikolas vis dar kaunasi.",
+    "review_note": "",
+    "source_asr": "Regis, Pikolos vis dar kaunasi.",
+    "idx": 32
+  },
+  {
+    "start_sec": 611.1700000000001,
+    "end_sec": 619.5899999999999,
+    "lt": "O mes nieko negalime padaryti, tik stypsoti nuošalyje.",
+    "review_note": "",
+    "source_asr": "O mes nieko negalime padaryti, tik stipstoti nuo šalyje.",
+    "idx": 33
+  },
+  {
+    "start_sec": 633.47,
+    "end_sec": 634.39,
+    "lt": "Siaubinga.",
+    "review_note": "",
+    "source_asr": "Siaubinga.",
+    "idx": 34
+  },
+  {
+    "start_sec": 634.69,
+    "end_sec": 638.17,
+    "lt": "Kas jums, mokytojau?",
+    "review_note": "",
+    "source_asr": "Kas jums mokyto jau?",
+    "idx": 35
+  },
+  {
+    "start_sec": 639.05,
+    "end_sec": 640.47,
+    "lt": "Jis artinasi.",
+    "review_note": "",
+    "source_asr": "Jis artinasi.",
+    "idx": 36
+  },
+  {
+    "start_sec": 641.17,
+    "end_sec": 642.53,
+    "lt": "Tuoj bus čia.",
+    "review_note": "",
+    "source_asr": "Tuoj bus čia.",
+    "idx": 37
+  },
+  {
+    "start_sec": 644.87,
+    "end_sec": 646.31,
+    "lt": "Siaubūnas Selas?",
+    "review_note": "",
+    "source_asr": "Siaubūnas Selas?",
+    "idx": 38
+  },
+  {
+    "start_sec": 648.59,
+    "end_sec": 650.75,
+    "lt": "Ne, tik ne jis.",
+    "review_note": "",
+    "source_asr": "Ne, tik ne jis.",
+    "idx": 39
+  },
+  {
+    "start_sec": 682.8,
+    "end_sec": 684.98,
+    "lt": "Ilgai laukiu šios dienos.",
+    "review_note": "",
+    "source_asr": "Ilgai laukiu šios dienos",
+    "idx": 40
+  },
+  {
+    "start_sec": 684.98,
+    "end_sec": 688.48,
+    "lt": "Šiandien aš tapsiu visagalis.",
+    "review_note": "",
+    "source_asr": "Šiandien aš tapsiu",
+    "idx": 41
+  },
+  {
+    "start_sec": 723.78,
+    "end_sec": 727.06,
+    "lt": "Būk geras berniukas, neverk.",
+    "review_note": "",
+    "source_asr": "Bū geras, berniukas, neverk",
+    "idx": 42
+  },
+  {
+    "start_sec": 730.0,
+    "end_sec": 732.26,
+    "lt": "Nurimk, mielasis, nurimk.",
+    "review_note": "",
+    "source_asr": "Nurimk, mielasis, nurimk",
+    "idx": 43
+  },
+  {
+    "start_sec": 734.12,
+    "end_sec": 737.36,
+    "lt": "Bulma, man nepavyksta jo nuraminti.",
+    "review_note": "",
+    "source_asr": "Bulma, mane pavyksta jo nuraminti",
+    "idx": 44
+  },
+  {
+    "start_sec": 737.36,
+    "end_sec": 739.28,
+    "lt": "Paskutinis dažnis.",
+    "review_note": "",
+    "source_asr": "Paskutinis dažnis",
+    "idx": 45
+  },
+  {
+    "start_sec": 740.38,
+    "end_sec": 743.98,
+    "lt": "Jei pakeisiu šį skaičių, veiks kuo puikiausiai.",
+    "review_note": "",
+    "source_asr": "Jei pakeisiu šį skaičių, veiks ko puikiausiai",
+    "idx": 46
+  },
+  {
+    "start_sec": 743.98,
+    "end_sec": 748.92,
+    "lt": "Tėti, prašau, nuramink Tranksą.",
+    "review_note": "",
+    "source_asr": "Tėti, prašau, nuramink trangse",
+    "idx": 47
+  },
+  {
+    "start_sec": 752.46,
+    "end_sec": 756.44,
+    "lt": "Bet man niekaip nepavyksta.",
+    "review_note": "",
+    "source_asr": "Bet man niekaip nepavyksta",
+    "idx": 48
+  },
+  {
+    "start_sec": 759.4,
+    "end_sec": 760.8,
+    "lt": "Kokia tu motina?",
+    "review_note": "",
+    "source_asr": "Kokia tu motina?",
+    "idx": 49
+  },
+  {
+    "start_sec": 761.07,
+    "end_sec": 762.64,
+    "lt": "Kodėl nepasirūpini savo vaiku?",
+    "review_note": "",
+    "source_asr": "Kodėl nepasirūpini savo vaiku?",
+    "idx": 50
+  },
+  {
+    "start_sec": 763.05,
+    "end_sec": 764.88,
+    "lt": "Kiek galima klausytis to rėkimo?",
+    "review_note": "",
+    "source_asr": "Kiek galime klausyti sto reikimo?",
+    "idx": 51
+  },
+  {
+    "start_sec": 765.45,
+    "end_sec": 769.68,
+    "lt": "Jei motina tokia nerūpestinga, tai vaikas tikrai užaugs netikėlis.",
+    "review_note": "",
+    "source_asr": "Jei motina tokia nerūpestinga, tai vaikas tikrai užauks netikelis",
+    "idx": 52
+  },
+  {
+    "start_sec": 774.74,
+    "end_sec": 777.08,
+    "lt": "Liaukis, neverta nerimauti.",
+    "review_note": "Provisional ASR reconstruction; verify original Lithuanian wording.",
+    "source_asr": "Laukis, neverta nerimauti",
+    "idx": 53
+  },
+  {
+    "start_sec": 778.52,
+    "end_sec": 782.22,
+    "lt": "Juk matome, kad Tranksas užaugęs bus labai dailus jaunuolis.",
+    "review_note": "",
+    "source_asr": "Juk matome, kad trangse sužaugęs bus labai dailus jaunuolis.",
+    "idx": 54
+  },
+  {
+    "start_sec": 784.17,
+    "end_sec": 786.73,
+    "lt": "Ar ne, mano brangusis Tranksai?",
+    "review_note": "",
+    "source_asr": "Ar ne, mano prangusis trangse?",
+    "idx": 55
+  },
+  {
+    "start_sec": 787.13,
+    "end_sec": 788.89,
+    "lt": "Bulma, gal jau baigei darbą?",
+    "review_note": "",
+    "source_asr": "Bulma, gal jau baigiai darba?",
+    "idx": 56
+  },
+  {
+    "start_sec": 793.6,
+    "end_sec": 797.58,
+    "lt": "Su šiuo valdymo pultu galėsime išjungti visus kiborgus.",
+    "review_note": "",
+    "source_asr": "Su šiuo valdymo pultu galėsime išjungti visus kyburgus.",
+    "idx": 57
+  },
+  {
+    "start_sec": 935.5,
+    "end_sec": 936.82,
+    "lt": "Skrisiu pasižiūrėti.",
+    "review_note": "",
+    "source_asr": "Skrisiu pasižiūrėti.",
+    "idx": 58
+  },
+  {
+    "start_sec": 953.58,
+    "end_sec": 954.92,
+    "lt": "Krilinai, ką mums daryti?",
+    "review_note": "",
+    "preview_idx": 1,
+    "idx": 59
+  },
+  {
+    "start_sec": 955.76,
+    "end_sec": 956.94,
+    "lt": "Iš kur aš galiu žinoti?",
+    "review_note": "",
+    "preview_idx": 2,
+    "idx": 60
+  },
+  {
+    "start_sec": 958.66,
+    "end_sec": 965.74,
+    "lt": "Jei tas pabaisa Selas įsiurbs kiborgus, visos mūsų viltys žlugs. Pražus visa Žemės planeta.",
+    "review_note": "ASR misrecognized Selas and įsiurbs; reconstructed using scene context.",
+    "preview_idx": 3,
+    "idx": 61
+  },
+  {
+    "start_sec": 968.32,
+    "end_sec": 969.1,
+    "lt": "Prakeikimas!",
+    "review_note": "",
+    "preview_idx": 4,
+    "idx": 62
+  },
+  {
+    "start_sec": 971.46,
+    "end_sec": 973.44,
+    "lt": "Krilinai, tau skambina Bulma.",
+    "review_note": "",
+    "preview_idx": 5,
+    "idx": 63
+  },
+  {
+    "start_sec": 974.19,
+    "end_sec": 975.04,
+    "lt": "Man?",
+    "review_note": "",
+    "preview_idx": 6,
+    "idx": 64
+  },
+  {
+    "start_sec": 976.17,
+    "end_sec": 978.34,
+    "lt": "Ji sako, kad sukūrė ginklą prieš kiborgus.",
+    "review_note": "ASR unclear around ginklą; original wording needs listener verification.",
+    "preview_idx": 7,
+    "idx": 65
+  },
+  {
+    "start_sec": 979.72,
+    "end_sec": 980.89,
+    "lt": "Kas? Ką pasakė?",
+    "review_note": "Opening interjection unclear in both transcripts; needs listener verification.",
+    "preview_idx": 8,
+    "idx": 66
+  },
+  {
+    "start_sec": 983.63,
+    "end_sec": 988.04,
+    "lt": "Taip, septynioliktojo ir aštuonioliktojo tipo kiborgai turi silpnąją vietą.",
+    "review_note": "Numbers expanded for pronunciation.",
+    "preview_idx": 9,
+    "idx": 67
+  },
+  {
+    "start_sec": 988.2,
+    "end_sec": 989.82,
+    "lt": "Tai skubaus išjungimo grandis.",
+    "review_note": "ASR says sujungimo; English specifies emergency shutdown. išjungimo is a provisional correction.",
+    "preview_idx": 10,
+    "idx": 68
+  },
+  {
+    "start_sec": 989.82,
+    "end_sec": 993.24,
+    "lt": "Nutraukę tą grandį, lengvai sunaikinsime kiborgus.",
+    "review_note": "",
+    "preview_idx": 11,
+    "idx": 69
+  },
+  {
+    "start_sec": 993.49,
+    "end_sec": 995.8,
+    "lt": "Aš ką tik sukūriau nuotolinio valdymo pultą.",
+    "review_note": "",
+    "preview_idx": 12,
+    "idx": 70
+  },
+  {
+    "start_sec": 1001.46,
+    "end_sec": 1004.42,
+    "lt": "Krilinai, paklausk, ar mes galėsime nukauti kiborgus?",
+    "review_note": "",
+    "preview_idx": 13,
+    "idx": 71
+  },
+  {
+    "start_sec": 1006.4,
+    "end_sec": 1009.74,
+    "lt": "Bulma, ar gali tuoj pat atgabenti pultą čionai?",
+    "review_note": "ASR says galiu; corrected person from scene context.",
+    "preview_idx": 14,
+    "idx": 72
+  },
+  {
+    "start_sec": 1010.14,
+    "end_sec": 1012.34,
+    "lt": "Pikolas jau kaunasi su kiborgais.",
+    "review_note": "",
+    "preview_idx": 15,
+    "idx": 73
+  },
+  {
+    "start_sec": 1014.36,
+    "end_sec": 1015.9,
+    "lt": "Gerai, tuoj atlėksiu.",
+    "review_note": "",
+    "preview_idx": 16,
+    "idx": 74
+  },
+  {
+    "start_sec": 1017.36,
+    "end_sec": 1022.42,
+    "lt": "Puiku. Jei sunaikinsime septynioliktąjį kiborgą, Selas netaps visagalis.",
+    "review_note": "Number expanded for pronunciation.",
+    "preview_idx": 17,
+    "idx": 75
+  },
+  {
+    "start_sec": 1037.25,
+    "end_sec": 1038.88,
+    "lt": "Sunaikinsime juos visus?",
+    "review_note": "",
+    "preview_idx": 18,
+    "idx": 76
+  },
+  {
+    "start_sec": 1039.2,
+    "end_sec": 1040.86,
+    "lt": "Krilinai, kas tau?",
+    "review_note": "",
+    "preview_idx": 19,
+    "idx": 77
+  },
+  {
+    "start_sec": 1043.27,
+    "end_sec": 1044.13,
+    "lt": "Nieko.",
+    "review_note": "",
+    "preview_idx": 20,
+    "idx": 78
+  },
+  {
+    "start_sec": 1045.59,
+    "end_sec": 1047.68,
+    "lt": "Aš išskrendu.",
+    "review_note": "",
+    "preview_idx": 21,
+    "idx": 79
+  },
+  {
+    "start_sec": 1048.17,
+    "end_sec": 1049.28,
+    "lt": "Pasirūpinkit vaiku.",
+    "review_note": "",
+    "preview_idx": 22,
+    "idx": 80
+  },
+  {
+    "start_sec": 1050.19,
+    "end_sec": 1051.48,
+    "lt": "Pasirūpinti tavo vaiku?",
+    "review_note": "",
+    "preview_idx": 23,
+    "idx": 81
+  },
+  {
+    "start_sec": 1051.6,
+    "end_sec": 1053.82,
+    "lt": "Kaip tu gali palikti savo mažylį vieną?",
+    "review_note": "",
+    "preview_idx": 24,
+    "idx": 82
+  },
+  {
+    "start_sec": 1055.22,
+    "end_sec": 1058.53,
+    "lt": "Paleisk! Visai Žemės planetai gresia didžiulis pavojus.",
+    "review_note": "",
+    "preview_idx": 25,
+    "idx": 83
+  },
+  {
+    "start_sec": 1058.65,
+    "end_sec": 1059.78,
+    "lt": "Tėveli!",
+    "review_note": "",
+    "idx": 84
+  },
+  {
+    "start_sec": 1069.22,
+    "end_sec": 1071.48,
+    "lt": "Selas pradeda pulti.",
+    "review_note": "",
+    "idx": 85
+  },
+  {
+    "start_sec": 1073.56,
+    "end_sec": 1074.3200000000002,
+    "lt": "Žinau.",
+    "review_note": "",
+    "source_asr": "Žinau",
+    "idx": 86
+  },
+  {
+    "start_sec": 1075.58,
+    "end_sec": 1077.6799999999998,
+    "lt": "Ar treniruotė dar nebaigta?",
+    "review_note": "",
+    "source_asr": "Ar treniruoti dar nebaigta?",
+    "idx": 87
+  },
+  {
+    "start_sec": 1078.44,
+    "end_sec": 1082.22,
+    "lt": "Aš įsitikinęs, kad Vedžitas jau tapo stipresnis už paprastą super sajaną.",
+    "review_note": "",
+    "source_asr": "Aš įsitikinės, kad vedžitas jau tapo stipresnis už paprastą super sajana",
+    "idx": 88
+  },
+  {
+    "start_sec": 1082.22,
+    "end_sec": 1083.7,
+    "lt": "Ko jis delsia?",
+    "review_note": "",
+    "source_asr": "Kuo jis dėlse?",
+    "idx": 89
+  },
+  {
+    "start_sec": 1090.27,
+    "end_sec": 1091.55,
+    "lt": "Vedžitai, paskubėk.",
+    "review_note": "",
+    "source_asr": "Vedžitai, paskubėk",
+    "idx": 90
+  },
+  {
+    "start_sec": 1091.55,
+    "end_sec": 1093.71,
+    "lt": "Antraip gali būti per vėlu.",
+    "review_note": "",
+    "source_asr": "Antraip gali būti perbėlų",
+    "idx": 91
+  },
+  {
+    "start_sec": 1243.24,
+    "end_sec": 1247.14,
+    "lt": "Nors mūsų jėgos beveik lygios, tu jau pradedi silpti.",
+    "review_note": "",
+    "source_asr": "Nors mūsų jėgos beveik lygios, tu jau pradedi silpti",
+    "idx": 92
+  },
+  {
+    "start_sec": 1247.14,
+    "end_sec": 1248.46,
+    "lt": "Netekai daug jėgų.",
+    "review_note": "",
+    "source_asr": "Netekai daug jėgų.",
+    "idx": 93
+  },
+  {
+    "start_sec": 1248.86,
+    "end_sec": 1251.16,
+    "lt": "O mano energija neišsenkama.",
+    "review_note": "",
+    "source_asr": "O mano energija neįsenkama.",
+    "idx": 94
+  },
+  {
+    "start_sec": 1311.28,
+    "end_sec": 1312.28,
+    "lt": "Selas?",
+    "review_note": "",
+    "source_asr": "Selas?",
+    "idx": 95
+  },
+  {
+    "start_sec": 1316.5,
+    "end_sec": 1319.44,
+    "lt": "Pagaliau pasirodė siaubūnas Selas.",
+    "review_note": "",
+    "source_asr": "Galo pasirodė saubūnas Selas.",
+    "idx": 96
+  },
+  {
+    "start_sec": 1341.8,
+    "end_sec": 1346.24,
+    "lt": "Nejau jam pavyks įsiurbti septynioliktąjį ir aštuonioliktąjį kiborgus?",
+    "review_note": "Provisional ASR reconstruction; verify original Lithuanian wording.",
+    "source_asr": "Neilgai jam pavyks įsirūkti 17-jai ir 18-jai akiborgus.",
+    "idx": 97
+  }
+]

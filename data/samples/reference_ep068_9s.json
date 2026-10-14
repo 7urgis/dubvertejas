@@ -1,0 +1,11 @@
+{
+  "source": "media/Dragon.Ball.Z.068.480p.DBox.DVD.REGRADE.LT-ENG-JAP.FLAC2.0.x264-SoM-7urgis.mkv",
+  "stream": 0,
+  "start_seconds": 235.1,
+  "duration_seconds": 9.2,
+  "raw": "data/samples/reference_ep068_9s_raw.flac",
+  "vocals": "data/samples/reference_ep068_9s_vocals.flac",
+  "separation": "htdemucs, vocals, shifts=1, segment=7; context 220–310 seconds",
+  "transcript": "Netaukšk nesąmonių. Sajanai nesugeba judėti taip greitai kaip tu. Iš kur žinai? O gal aš uoliai treniravausi?",
+  "transcript_status": "Whisper large-v3 on original and separated audio, with spelling corrections; pending listener verification"
+}

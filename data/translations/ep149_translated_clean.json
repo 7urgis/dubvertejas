@@ -1,0 +1,906 @@
+[
+  {
+    "idx": 34,
+    "start_sec": 117.31,
+    "end_sec": 120.07,
+    "timing": "00:01:57,310 --> 00:02:00,070",
+    "en": "At last, Goku has recovered.",
+    "lt": "Pagaliau Gokas atgavo jėgas."
+  },
+  {
+    "idx": 35,
+    "start_sec": 120.07,
+    "end_sec": 122.19,
+    "timing": "00:02:00,070 --> 00:02:02,190",
+    "en": "However, it is already too late.",
+    "lt": "Tačiau jau per vėlu."
+  },
+  {
+    "idx": 36,
+    "start_sec": 122.19,
+    "end_sec": 127.23,
+    "timing": "00:02:02,190 --> 00:02:07,230",
+    "en": "A battle between Piccolo and the Android No.17 is already underway.",
+    "lt": "Kova tarp Pikolo ir roboto numeris septyniolika jau prasidėjo."
+  },
+  {
+    "idx": 37,
+    "start_sec": 144.3,
+    "end_sec": 147.1,
+    "timing": "00:02:24,300 --> 00:02:27,100",
+    "en": "Too bad. That's a pity, isn't it?",
+    "lt": "Kaip gaila. Kokia nesėkmė, ar ne?"
+  },
+  {
+    "idx": 38,
+    "start_sec": 148.42,
+    "end_sec": 151.21,
+    "timing": "00:02:28,420 --> 00:02:31,210",
+    "en": "Ha! I'm still just getting started!",
+    "lt": "Cha! Aš dar tik pradedu!"
+  },
+  {
+    "idx": 39,
+    "start_sec": 154.08,
+    "end_sec": 156.05,
+    "timing": "00:02:34,080 --> 00:02:36,050",
+    "en": "This ki is that of Piccolo.",
+    "lt": "Ši energija yra Pikolo."
+  },
+  {
+    "idx": 40,
+    "start_sec": 156.05,
+    "end_sec": 161.14,
+    "timing": "00:02:36,050 --> 00:02:41,140",
+    "en": "The opponents he would be fighting at such a high power could only be No.17 and the others!",
+    "lt": "Priešininkai, su kuriais jis kovoja tokia didele jėga, gali būti tik robotas numeris septyniolika ir kiti!"
+  },
+  {
+    "idx": 41,
+    "start_sec": 161.14,
+    "end_sec": 162.63,
+    "timing": "00:02:41,140 --> 00:02:42,630",
+    "en": "You just wait!",
+    "lt": "Tik palauk!"
+  },
+  {
+    "idx": 42,
+    "start_sec": 162.63,
+    "end_sec": 166.8,
+    "timing": "00:02:42,630 --> 00:02:46,800",
+    "en": "My power is far greater than yours!",
+    "lt": "Mano jėga gerokai didesnė už tavo!"
+  },
+  {
+    "idx": 43,
+    "start_sec": 171.61,
+    "end_sec": 174.4,
+    "timing": "00:02:51,610 --> 00:02:54,400",
+    "en": "Cell has begun moving out in earnest,",
+    "lt": "Selas pradėjo veikti iš visų jėgų,"
+  },
+  {
+    "idx": 44,
+    "start_sec": 174.4,
+    "end_sec": 177.44,
+    "timing": "00:02:54,400 --> 00:02:57,440",
+    "en": "heading toward his perfect form!",
+    "lt": "artėdamas prie savo tobulos formos!"
+  },
+  {
+    "idx": 45,
+    "start_sec": 178.08,
+    "end_sec": 182.62,
+    "timing": "00:02:58,080 --> 00:03:02,620",
+    "en": "What has been feared is now coming true.",
+    "lt": "Tai, ko visi bijojo, dabar pildosi."
+  },
+  {
+    "idx": 46,
+    "start_sec": 186.27,
+    "end_sec": 194.25,
+    "timing": "00:03:06,270 --> 00:03:14,250",
+    "en": "How I Have Waited for This Day!!",
+    "lt": "Kaip ilgai aš laukiau šios dienos!"
+  },
+  {
+    "idx": 47,
+    "start_sec": 186.27,
+    "end_sec": 194.25,
+    "timing": "00:03:06,270 --> 00:03:14,250",
+    "en": "Cell • Prologue to Perfection",
+    "lt": "Selas netrukus taps visagalis."
+  },
+  {
+    "idx": 48,
+    "start_sec": 220.26,
+    "end_sec": 223.45,
+    "timing": "00:03:40,260 --> 00:03:43,450",
+    "en": "For not even being an android, you have fantastic power.",
+    "lt": "Nors nesi joks robotas, tavo jėga neįtikėtina."
+  },
+  {
+    "idx": 49,
+    "start_sec": 224.51,
+    "end_sec": 227.95,
+    "timing": "00:03:44,510 --> 00:03:47,950",
+    "en": "It is certainly apparent that you are not Piccolo Daimao.",
+    "lt": "Aišku viena – tu tikrai nesi Pikolas Daimao."
+  },
+  {
+    "idx": 50,
+    "start_sec": 231.42,
+    "end_sec": 235.71,
+    "timing": "00:03:51,420 --> 00:03:55,710",
+    "en": "Of course, I have no interest in your identity.",
+    "lt": "Žinoma, tavo tapatybė manęs nedomina."
+  },
+  {
+    "idx": 51,
+    "start_sec": 236.55,
+    "end_sec": 238.97,
+    "timing": "00:03:56,550 --> 00:03:58,970",
+    "en": "I only want to know where Son Goku is.",
+    "lt": "Aš tik noriu sužinoti, kur yra Son Gokas."
+  },
+  {
+    "idx": 52,
+    "start_sec": 239.89,
+    "end_sec": 243.06,
+    "timing": "00:03:59,890 --> 00:04:03,060",
+    "en": "As usual, I don't suppose you are of the mind to tell us, are you?",
+    "lt": "Kaip visada, turbūt nesiruoši mums to pasakyti, ar ne?"
+  },
+  {
+    "idx": 53,
+    "start_sec": 243.69,
+    "end_sec": 247.08,
+    "timing": "00:04:03,690 --> 00:04:07,080",
+    "en": "Your objective is to kill Goku.",
+    "lt": "Tavo tikslas – nužudyti Goką."
+  },
+  {
+    "idx": 54,
+    "start_sec": 249.42,
+    "end_sec": 252.6,
+    "timing": "00:04:09,420 --> 00:04:12,600",
+    "en": "There's no reason that I should tell you where he is.",
+    "lt": "Nėra jokios priežasties, kodėl turėčiau tau sakyti, kur jis yra."
+  },
+  {
+    "idx": 55,
+    "start_sec": 253.66,
+    "end_sec": 256.15,
+    "timing": "00:04:13,660 --> 00:04:16,150",
+    "en": "Well then, shall we continue the fight?",
+    "lt": "Ką gi, tęskime kovą?"
+  },
+  {
+    "idx": 56,
+    "start_sec": 257.79,
+    "end_sec": 259.45,
+    "timing": "00:04:17,790 --> 00:04:19,450",
+    "en": "I think you'll come to want to speak.",
+    "lt": "Manau, tuoj pats panorėsi prašnekti."
+  },
+  {
+    "idx": 57,
+    "start_sec": 263.33,
+    "end_sec": 266.04,
+    "timing": "00:04:23,330 --> 00:04:26,040",
+    "en": "This time, I'm fighting like I mean it!",
+    "lt": "Šį kartą aš kausiuosi iš visų jėgų!"
+  },
+  {
+    "idx": 58,
+    "start_sec": 369.4,
+    "end_sec": 371.69,
+    "timing": "00:06:09,400 --> 00:06:11,690",
+    "en": "Your speed is decent.",
+    "lt": "Tavo greitis visai neblogas."
+  },
+  {
+    "idx": 59,
+    "start_sec": 371.69,
+    "end_sec": 374.48,
+    "timing": "00:06:11,690 --> 00:06:14,480",
+    "en": "But your punches don't seem to have enough weight behind them.",
+    "lt": "Bet tavo smūgiams akivaizdžiai trūksta jėgos."
+  },
+  {
+    "idx": 60,
+    "start_sec": 374.48,
+    "end_sec": 375.58,
+    "timing": "00:06:14,480 --> 00:06:15,580",
+    "en": "What was that?!",
+    "lt": "Ką pasakei?!"
+  },
+  {
+    "idx": 61,
+    "start_sec": 377.49,
+    "end_sec": 380.16,
+    "timing": "00:06:17,490 --> 00:06:20,160",
+    "en": "How nice of you to talk so big.",
+    "lt": "Kaip gražu, kad taip drąsiai šneki."
+  },
+  {
+    "idx": 62,
+    "start_sec": 381.58,
+    "end_sec": 386.78,
+    "timing": "00:06:21,580 --> 00:06:26,780",
+    "en": "As you face the strongest man in history, Android No.17...",
+    "lt": "Stovėdamas prieš patį stipriausią kovotoją istorijoje – robotą numeris septyniolika..."
+  },
+  {
+    "idx": 63,
+    "start_sec": 437.05,
+    "end_sec": 440.15,
+    "timing": "00:07:17,050 --> 00:07:20,150",
+    "en": "That guy really is strong.",
+    "lt": "Tas vyrukas iš tiesų stiprus."
+  },
+  {
+    "idx": 64,
+    "start_sec": 440.15,
+    "end_sec": 442.21,
+    "timing": "00:07:20,150 --> 00:07:22,210",
+    "en": "He's evenly matched against No.17.",
+    "lt": "Jis kaunasi lygiai su robotu numeris septyniolika."
+  },
+  {
+    "idx": 65,
+    "start_sec": 455.4,
+    "end_sec": 457.52,
+    "timing": "00:07:35,400 --> 00:07:37,520",
+    "en": "Piccolo-san, hang in there!",
+    "lt": "Pikolai, laikykis!"
+  },
+  {
+    "idx": 66,
+    "start_sec": 458.67,
+    "end_sec": 460.69,
+    "timing": "00:07:38,670 --> 00:07:40,690",
+    "en": "Keep it up, Piccolo!",
+    "lt": "Pirmyn, Pikolai!"
+  },
+  {
+    "idx": 67,
+    "start_sec": 460.7,
+    "end_sec": 465.03,
+    "timing": "00:07:40,700 --> 00:07:45,030",
+    "en": "Until Vegeta and Trunks' training is finished...",
+    "lt": "Kol Vedžitas ir Tranksas baigs savo treniruotes..."
+  },
+  {
+    "idx": 68,
+    "start_sec": 585.35,
+    "end_sec": 589.38,
+    "timing": "00:09:45,350 --> 00:09:49,380",
+    "en": "Yeesh. How many islands are you going to destroy before you're satisfied?",
+    "lt": "Ech. Kiek dar salų sugriausi, kol pasisotinsi?"
+  },
+  {
+    "idx": 69,
+    "start_sec": 606.92,
+    "end_sec": 609.3,
+    "timing": "00:10:06,920 --> 00:10:09,300",
+    "en": "A-Awesome.",
+    "lt": "N-Neįtikėtina."
+  },
+  {
+    "idx": 70,
+    "start_sec": 609.3,
+    "end_sec": 612.3,
+    "timing": "00:10:09,300 --> 00:10:12,300",
+    "en": "Piccolo still seems to be hanging in there.",
+    "lt": "Pikolas vis dar laikosi."
+  },
+  {
+    "idx": 71,
+    "start_sec": 616.56,
+    "end_sec": 620.02,
+    "timing": "00:10:16,560 --> 00:10:20,020",
+    "en": "Dammit, are we just going to stay here like this?",
+    "lt": "Po velnių, ar mes tiesiog taip ir stovėsime čia?"
+  },
+  {
+    "idx": 72,
+    "start_sec": 632.78,
+    "end_sec": 634.78,
+    "timing": "00:10:32,780 --> 00:10:34,780",
+    "en": "How can this be?!",
+    "lt": "Kaip tai įmanoma?!"
+  },
+  {
+    "idx": 73,
+    "start_sec": 636.38,
+    "end_sec": 637.99,
+    "timing": "00:10:36,380 --> 00:10:37,990",
+    "en": "Wh-What's wrong?",
+    "lt": "K-kas nutiko?"
+  },
+  {
+    "idx": 74,
+    "start_sec": 638.82,
+    "end_sec": 643.0,
+    "timing": "00:10:38,820 --> 00:10:43,000",
+    "en": "H-He's coming closer! At a time like this...!",
+    "lt": "J-jis artėja! Tokiu metu...!"
+  },
+  {
+    "idx": 75,
+    "start_sec": 643.99,
+    "end_sec": 645.71,
+    "timing": "00:10:43,990 --> 00:10:45,710",
+    "en": "C-Cell?",
+    "lt": "S-Selas?"
+  },
+  {
+    "idx": 76,
+    "start_sec": 648.93,
+    "end_sec": 650.46,
+    "timing": "00:10:48,930 --> 00:10:50,460",
+    "en": "I-It can't be!",
+    "lt": "N-negali būti!"
+  },
+  {
+    "idx": 77,
+    "start_sec": 682.64,
+    "end_sec": 686.34,
+    "timing": "00:11:22,640 --> 00:11:26,340",
+    "en": "I've waited a long time for this day to come!",
+    "lt": "Aš taip ilgai laukiau šios dienos!"
+  },
+  {
+    "idx": 78,
+    "start_sec": 686.34,
+    "end_sec": 689.75,
+    "timing": "00:11:26,340 --> 00:11:29,750",
+    "en": "The day when I become my perfect form!",
+    "lt": "Dienos, kai įgysiu tobulą formą!"
+  },
+  {
+    "idx": 79,
+    "start_sec": 723.94,
+    "end_sec": 729.86,
+    "timing": "00:12:03,940 --> 00:12:09,860",
+    "en": "Ah, there, there! There, there! Googley googley goo!",
+    "lt": "Ak, ramiai, ramiai! Uti uti uti!"
+  },
+  {
+    "idx": 80,
+    "start_sec": 729.86,
+    "end_sec": 733.23,
+    "timing": "00:12:09,860 --> 00:12:13,230",
+    "en": "Don't cry, now. Don't cry.",
+    "lt": "Neverk, neverk."
+  },
+  {
+    "idx": 81,
+    "start_sec": 733.94,
+    "end_sec": 736.22,
+    "timing": "00:12:13,940 --> 00:12:16,220",
+    "en": "Bulma, I can't manage him!",
+    "lt": "Bulma, aš su juo nesusitvarkau!"
+  },
+  {
+    "idx": 82,
+    "start_sec": 737.37,
+    "end_sec": 738.99,
+    "timing": "00:12:17,370 --> 00:12:18,990",
+    "en": "This is the last frequency.",
+    "lt": "Tai paskutinis dažnis."
+  },
+  {
+    "idx": 83,
+    "start_sec": 739.89,
+    "end_sec": 743.0,
+    "timing": "00:12:19,890 --> 00:12:23,000",
+    "en": "Once I finish punching in this data, it will be complete!",
+    "lt": "Kai baigsiu suvedinėti šiuos duomenis, viskas bus baigta!"
+  },
+  {
+    "idx": 84,
+    "start_sec": 746.02,
+    "end_sec": 750.06,
+    "timing": "00:12:26,020 --> 00:12:30,060",
+    "en": "Say, Dad, keep Trunks quiet a bit longer!",
+    "lt": "Tėti, nuramink Tranksą dar trumpam!"
+  },
+  {
+    "idx": 85,
+    "start_sec": 752.4,
+    "end_sec": 756.32,
+    "timing": "00:12:32,400 --> 00:12:36,320",
+    "en": "Yeah, well, you see...",
+    "lt": "Na, žinai..."
+  },
+  {
+    "idx": 86,
+    "start_sec": 756.32,
+    "end_sec": 758.36,
+    "timing": "00:12:36,320 --> 00:12:38,360",
+    "en": "You're his mother, ain'tcha?",
+    "lt": "Tu juk jo motina, ar ne?"
+  },
+  {
+    "idx": 87,
+    "start_sec": 759.54,
+    "end_sec": 763.99,
+    "timing": "00:12:39,540 --> 00:12:43,990",
+    "en": "Come look after yer baby some! It's more'n I can stand!",
+    "lt": "Ateik pati pasirūpinti savo vaiku! Aš jau nebegaliu!"
+  },
+  {
+    "idx": 88,
+    "start_sec": 764.56,
+    "end_sec": 768.72,
+    "timing": "00:12:44,560 --> 00:12:48,720",
+    "en": "'nbelievable! Bein' raised by such a cold mother like this,",
+    "lt": "Neįtikėtina! Kai augina tokia šalta motina,"
+  },
+  {
+    "idx": 89,
+    "start_sec": 768.72,
+    "end_sec": 771.42,
+    "timing": "00:12:48,720 --> 00:12:51,420",
+    "en": "in time this kid's gonna go bad!",
+    "lt": "šis vaikas ilgainiui nueis šunkeliais!"
+  },
+  {
+    "idx": 90,
+    "start_sec": 773.82,
+    "end_sec": 776.98,
+    "timing": "00:12:53,820 --> 00:12:56,980",
+    "en": "Horsefeathers! There's no need to worry about that!",
+    "lt": "Nesąmonės! Nėra ko dėl to jaudintis!"
+  },
+  {
+    "idx": 91,
+    "start_sec": 778.26,
+    "end_sec": 782.85,
+    "timing": "00:12:58,260 --> 00:13:02,850",
+    "en": "Trunks is going to become an incredibly cool and handsome young man, after all.",
+    "lt": "Juk Tranksas išaugs į nepaprastai šaunų ir gražų jaunuolį."
+  },
+  {
+    "idx": 92,
+    "start_sec": 783.96,
+    "end_sec": 785.01,
+    "timing": "00:13:03,960 --> 00:13:05,010",
+    "en": "Aren't you, Trunks?",
+    "lt": "Argi ne, Tranksai?"
+  },
+  {
+    "idx": 93,
+    "start_sec": 785.69,
+    "end_sec": 788.85,
+    "timing": "00:13:05,690 --> 00:13:08,850",
+    "en": "Is it okay now? Are you finished?",
+    "lt": "Ar jau gerai? Ar baigei?"
+  },
+  {
+    "idx": 94,
+    "start_sec": 793.4,
+    "end_sec": 798.15,
+    "timing": "00:13:13,400 --> 00:13:18,150",
+    "en": "With this, we'll be able to utterly terminate the Androids' actions!",
+    "lt": "Su šiuo prietaisu galėsime visiškai sustabdyti robotų veiklą!"
+  },
+  {
+    "idx": 95,
+    "start_sec": 934.79,
+    "end_sec": 936.16,
+    "timing": "00:15:34,790 --> 00:15:36,160",
+    "en": "My, my!",
+    "lt": "Oi oi oi!"
+  },
+  {
+    "idx": 96,
+    "start_sec": 952.27,
+    "end_sec": 954.14,
+    "timing": "00:15:52,270 --> 00:15:54,140",
+    "en": "What do we do, Kuririn?",
+    "lt": "Ką darysime, Krilinai?"
+  },
+  {
+    "idx": 97,
+    "start_sec": 954.69,
+    "end_sec": 957.59,
+    "timing": "00:15:54,690 --> 00:15:57,590",
+    "en": "H-How can I answer something like that?",
+    "lt": "K-kaip aš galiu į tai atsakyti?"
+  },
+  {
+    "idx": 98,
+    "start_sec": 958.27,
+    "end_sec": 963.86,
+    "timing": "00:15:58,270 --> 00:16:03,860",
+    "en": "If this Cell monster were to absorb the Androids now,",
+    "lt": "Jei šis pabaisa Selas dabar absorbuos robotus,"
+  },
+  {
+    "idx": 99,
+    "start_sec": 963.86,
+    "end_sec": 967.53,
+    "timing": "00:16:03,860 --> 00:16:07,530",
+    "en": "all of our hopes would vanish.",
+    "lt": "visos mūsų viltys žlugs."
+  },
+  {
+    "idx": 100,
+    "start_sec": 967.53,
+    "end_sec": 968.79,
+    "timing": "00:16:07,530 --> 00:16:08,790",
+    "en": "Damn!",
+    "lt": "Po velnių!"
+  },
+  {
+    "idx": 101,
+    "start_sec": 971.37,
+    "end_sec": 975.33,
+    "timing": "00:16:11,370 --> 00:16:15,330",
+    "en": "Kuririn! Bulma's callin' on the phone for you! Come take it!",
+    "lt": "Krilinai! Tau skambina Bulma! Paimk ragelį!"
+  },
+  {
+    "idx": 102,
+    "start_sec": 975.91,
+    "end_sec": 979.42,
+    "timing": "00:16:15,910 --> 00:16:19,420",
+    "en": "She's sayin' somethin' about havin' found a weakness in the Androids!",
+    "lt": "Ji sako radusi robotų silpnąją vietą!"
+  },
+  {
+    "idx": 103,
+    "start_sec": 980.29,
+    "end_sec": 981.92,
+    "timing": "00:16:20,290 --> 00:16:21,920",
+    "en": "What's that?!",
+    "lt": "Ką tokio?!"
+  },
+  {
+    "idx": 104,
+    "start_sec": 980.29,
+    "end_sec": 981.92,
+    "timing": "00:16:20,290 --> 00:16:21,920",
+    "en": "What?!",
+    "lt": "Ką?!"
+  },
+  {
+    "idx": 105,
+    "start_sec": 982.84,
+    "end_sec": 984.39,
+    "timing": "00:16:22,840 --> 00:16:24,390",
+    "en": "That's right!",
+    "lt": "Būtent!"
+  },
+  {
+    "idx": 106,
+    "start_sec": 984.39,
+    "end_sec": 990.03,
+    "timing": "00:16:24,390 --> 00:16:30,030",
+    "en": "No.17 and No.18 have emergency shutdown circuitry incorporated into their bodies!",
+    "lt": "numeris septyniolika ir numeris aštuoniolika savo kūnuose turi avarinio išjungimo schemas!"
+  },
+  {
+    "idx": 107,
+    "start_sec": 990.03,
+    "end_sec": 992.34,
+    "timing": "00:16:30,030 --> 00:16:32,340",
+    "en": "Once we shut off activity in those circuits,",
+    "lt": "Kai tik išjungsime tas grandines,"
+  },
+  {
+    "idx": 108,
+    "start_sec": 992.34,
+    "end_sec": 996.33,
+    "timing": "00:16:32,340 --> 00:16:36,330",
+    "en": "then no matter if they are Androids, you can destroy them easily, right?",
+    "lt": "kad ir kokie robotai jie būtų, juos bus lengva sunaikinti, tiesa?"
+  },
+  {
+    "idx": 109,
+    "start_sec": 997.36,
+    "end_sec": 1000.69,
+    "timing": "00:16:37,360 --> 00:16:40,690",
+    "en": "Yeah! I just completed a controller that will do it!",
+    "lt": "Taip! Aš ką tik baigiau valdymo pultelį, kuris tai padarys!"
+  },
+  {
+    "idx": 110,
+    "start_sec": 1001.15,
+    "end_sec": 1003.52,
+    "timing": "00:16:41,150 --> 00:16:43,520",
+    "en": "Say, can we beat the Androids?",
+    "lt": "Sakyk, ar galime nugalėti robotus?"
+  },
+  {
+    "idx": 111,
+    "start_sec": 1004.32,
+    "end_sec": 1005.21,
+    "timing": "00:16:44,320 --> 00:16:45,210",
+    "en": "Uh huh...",
+    "lt": "Aha..."
+  },
+  {
+    "idx": 112,
+    "start_sec": 1006.82,
+    "end_sec": 1009.45,
+    "timing": "00:16:46,820 --> 00:16:49,450",
+    "en": "Beg your pardon, but could you bring it here right away?",
+    "lt": "Atsiprašau, bet ar galėtum kuo greičiau jį čia atgabenti?"
+  },
+  {
+    "idx": 113,
+    "start_sec": 1010.03,
+    "end_sec": 1013.66,
+    "timing": "00:16:50,030 --> 00:16:53,660",
+    "en": "Right now, Piccolo-san is fighting with them, the Androids!",
+    "lt": "Dabar Pikolas kaunasi su tais robotais!"
+  },
+  {
+    "idx": 114,
+    "start_sec": 1013.66,
+    "end_sec": 1015.62,
+    "timing": "00:16:53,660 --> 00:16:55,620",
+    "en": "Sure! I'll leave right away!",
+    "lt": "Aišku! Tuoj pat išskrendu!"
+  },
+  {
+    "idx": 115,
+    "start_sec": 1017.19,
+    "end_sec": 1018.79,
+    "timing": "00:16:57,190 --> 00:16:58,790",
+    "en": "Great!",
+    "lt": "Puiku!"
+  },
+  {
+    "idx": 116,
+    "start_sec": 1018.79,
+    "end_sec": 1022.54,
+    "timing": "00:16:58,790 --> 00:17:02,540",
+    "en": "If we destroy No.17 and the others, Cell cannot become his perfect form!",
+    "lt": "Jei sunaikinsime robotą numeris septyniolika ir kitus, Selas negalės pasiekti tobulos formos!"
+  },
+  {
+    "idx": 117,
+    "start_sec": 1035.48,
+    "end_sec": 1037.03,
+    "timing": "00:17:15,480 --> 00:17:17,030",
+    "en": "Destroy, huh?",
+    "lt": "Sunaikinti, sakai?"
+  },
+  {
+    "idx": 118,
+    "start_sec": 1039.31,
+    "end_sec": 1039.98,
+    "timing": "00:17:19,310 --> 00:17:19,980",
+    "en": "What is it?",
+    "lt": "Kas yra?"
+  },
+  {
+    "idx": 119,
+    "start_sec": 1042.91,
+    "end_sec": 1044.45,
+    "timing": "00:17:22,910 --> 00:17:24,450",
+    "en": "I-It's nothing.",
+    "lt": "N-nieko."
+  },
+  {
+    "idx": 120,
+    "start_sec": 1045.61,
+    "end_sec": 1048.53,
+    "timing": "00:17:25,610 --> 00:17:28,530",
+    "en": "Well, I'm off. Take good care, if you please.",
+    "lt": "Na, aš lekiu. Būkite atsargūs, prašau."
+  },
+  {
+    "idx": 121,
+    "start_sec": 1048.53,
+    "end_sec": 1050.4,
+    "timing": "00:17:28,530 --> 00:17:30,400",
+    "en": "What's this \"if you please\"?!",
+    "lt": "Ką reiškia „prašau“?!"
+  },
+  {
+    "idx": 122,
+    "start_sec": 1050.95,
+    "end_sec": 1053.91,
+    "timing": "00:17:30,950 --> 00:17:33,910",
+    "en": "You were gonna leave here all by yerself, weren'cha?",
+    "lt": "Tu juk ketinai išsinešdinti viena, ar ne?"
+  },
+  {
+    "idx": 123,
+    "start_sec": 1053.91,
+    "end_sec": 1058.41,
+    "timing": "00:17:33,910 --> 00:17:38,410",
+    "en": "The Earth is in great danger! Let me go!",
+    "lt": "Žemei gresia didžiulis pavojus! Paleisk mane!"
+  },
+  {
+    "idx": 124,
+    "start_sec": 1067.68,
+    "end_sec": 1073.08,
+    "timing": "00:17:47,680 --> 00:17:53,080",
+    "en": "F-Father! Cell has... Cell has started to move!",
+    "lt": "T-tėve! Selas... Selas ėmė judėti!"
+  },
+  {
+    "idx": 125,
+    "start_sec": 1073.08,
+    "end_sec": 1075.14,
+    "timing": "00:17:53,080 --> 00:17:55,140",
+    "en": "Yeah. I know.",
+    "lt": "Taip. Žinau."
+  },
+  {
+    "idx": 126,
+    "start_sec": 1076.06,
+    "end_sec": 1077.52,
+    "timing": "00:17:56,060 --> 00:17:57,520",
+    "en": "Still not yet?",
+    "lt": "Vis dar nieko?"
+  },
+  {
+    "idx": 127,
+    "start_sec": 1077.52,
+    "end_sec": 1079.19,
+    "timing": "00:17:57,520 --> 00:17:59,190",
+    "en": "Vegeta is extremely gifted.",
+    "lt": "Vedžitas yra nepaprastai talentingas."
+  },
+  {
+    "idx": 128,
+    "start_sec": 1079.19,
+    "end_sec": 1082.95,
+    "timing": "00:17:59,190 --> 00:18:02,950",
+    "en": "He should have overcome the Super Saiyan wall long ago.",
+    "lt": "Jis jau seniai turėjo peržengti Super Sajano ribą."
+  },
+  {
+    "idx": 129,
+    "start_sec": 1089.11,
+    "end_sec": 1091.43,
+    "timing": "00:18:09,110 --> 00:18:11,430",
+    "en": "Please hurry, Vegeta.",
+    "lt": "Prašau, paskubėk, Vedžitai."
+  },
+  {
+    "idx": 130,
+    "start_sec": 1091.43,
+    "end_sec": 1093.78,
+    "timing": "00:18:11,430 --> 00:18:13,780",
+    "en": "What will happen cannot be undone!",
+    "lt": "Jei tai įvyks, kelio atgal nebebus!"
+  },
+  {
+    "idx": 131,
+    "start_sec": 1243.02,
+    "end_sec": 1244.56,
+    "timing": "00:20:43,020 --> 00:20:44,560",
+    "en": "Our powers may be evenly matched,",
+    "lt": "Mūsų jėgos gal ir apylygės,"
+  },
+  {
+    "idx": 132,
+    "start_sec": 1244.56,
+    "end_sec": 1247.49,
+    "timing": "00:20:44,560 --> 00:20:47,490",
+    "en": "but there appears to be a gap widening between our stamina.",
+    "lt": "tačiau mūsų ištvermė akivaizdžiai skiriasi."
+  },
+  {
+    "idx": 133,
+    "start_sec": 1248.65,
+    "end_sec": 1251.77,
+    "timing": "00:20:48,650 --> 00:20:51,770",
+    "en": "My energy will never drop!",
+    "lt": "Mano energija niekada nesibaigs!"
+  },
+  {
+    "idx": 134,
+    "start_sec": 1309.08,
+    "end_sec": 1311.58,
+    "timing": "00:21:49,080 --> 00:21:51,580",
+    "en": "C-Cell!",
+    "lt": "S-Selas!"
+  },
+  {
+    "idx": 135,
+    "start_sec": 1315.26,
+    "end_sec": 1317.61,
+    "timing": "00:21:55,260 --> 00:21:57,610",
+    "en": "At last, Cell has appeared!",
+    "lt": "Pagaliau Selas pasirodė!"
+  },
+  {
+    "idx": 136,
+    "start_sec": 1340.66,
+    "end_sec": 1345.95,
+    "timing": "00:22:20,660 --> 00:22:25,950",
+    "en": "Has the time at last come for him to merge with No.17 and No.18?",
+    "lt": "Ar pagaliau atėjo laikas jam susijungti su robotu numeris septyniolika ir numeriu aštuoniolika?"
+  },
+  {
+    "idx": 172,
+    "start_sec": 1450.56,
+    "end_sec": 1452.1,
+    "timing": "00:24:10,560 --> 00:24:12,100",
+    "en": "Heya! I'm Goku!",
+    "lt": "Sveiki! Aš esu Gokas!"
+  },
+  {
+    "idx": 173,
+    "start_sec": 1452.1,
+    "end_sec": 1453.97,
+    "timing": "00:24:12,100 --> 00:24:13,970",
+    "en": "Damn, what a ki.",
+    "lt": "Velniava, kokia galinga energija."
+  },
+  {
+    "idx": 174,
+    "start_sec": 1453.97,
+    "end_sec": 1456.58,
+    "timing": "00:24:13,970 --> 00:24:16,580",
+    "en": "Cell has raised his power like crazy.",
+    "lt": "Selas beprotiškai padidino savo galią."
+  },
+  {
+    "idx": 175,
+    "start_sec": 1456.58,
+    "end_sec": 1459.32,
+    "timing": "00:24:16,580 --> 00:24:19,320",
+    "en": "Stop, Piccolo! Not even you're a match for him!",
+    "lt": "Sustok, Pikolai! Net tu jam neprilygsti!"
+  },
+  {
+    "idx": 176,
+    "start_sec": 1459.32,
+    "end_sec": 1460.48,
+    "timing": "00:24:19,320 --> 00:24:20,480",
+    "en": "Curse you, Cell!",
+    "lt": "Būk prakeiktas, Selai!"
+  },
+  {
+    "idx": 177,
+    "start_sec": 1460.48,
+    "end_sec": 1462.86,
+    "timing": "00:24:20,480 --> 00:24:22,860",
+    "en": "Just how many people have you sacrificed?!",
+    "lt": "Kiek žmonių tu jau paaukojai?!"
+  },
+  {
+    "idx": 178,
+    "start_sec": 1462.86,
+    "end_sec": 1464.94,
+    "timing": "00:24:22,860 --> 00:24:24,940",
+    "en": "I won't let you reach your perfect form!",
+    "lt": "Aš neleisiu tau pasiekti tobulos formos!"
+  },
+  {
+    "idx": 179,
+    "start_sec": 1465.28,
+    "end_sec": 1466.95,
+    "timing": "00:24:25,280 --> 00:24:26,950",
+    "en": "Next time on Dragon Ball Z:",
+    "lt": "Kitoje Drakonų Kovos Z serijoje:"
+  },
+  {
+    "idx": 180,
+    "start_sec": 1466.95,
+    "end_sec": 1470.62,
+    "timing": "00:24:26,950 --> 00:24:30,620",
+    "en": "\"The Suicide Counterattack Proves Ineffective! Piccolo's Flame Burns Out!!\"",
+    "lt": "„Savižudiška ataka bejėgė! Pikolo liepsna gęsta!!“"
+  },
+  {
+    "idx": 181,
+    "start_sec": 1470.62,
+    "end_sec": 1473.12,
+    "timing": "00:24:30,620 --> 00:24:33,120",
+    "en": "Oh, no! Piccolo-san's ki is fading out!",
+    "lt": "O ne! Pikolo energija silpsta!"
+  }
+]
